@@ -3,24 +3,23 @@ const admin = require("firebase-admin");
 
 admin.initializeApp();
 
-// Create and Deploy Your First Cloud Functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
-
-exports.helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", { structuredData: true });
-  response.send("Hello world!");
-});
+const express = require("express");
+const app = express();
 
 // GET ALL DOCS FROM DB
-exports.getMurmurs = functions.https.onRequest((req, res) => {
+app.get("/murmurs", (req, res) => {
   admin
     .firestore()
     .collection("murmurs")
+    .orderBy("createdAt", "desc")
     .get()
     .then((data) => {
       let murmurs = [];
       data.forEach((doc) => {
-        murmurs.push(doc.data());
+        murmurs.push({
+          murmurId: doc.id,
+          ...doc.data(),
+        });
       });
       return res.json(murmurs);
     })
@@ -28,14 +27,11 @@ exports.getMurmurs = functions.https.onRequest((req, res) => {
 });
 
 // CREATE DOCS
-exports.createMurmur = functions.https.onRequest((req, res) => {
-  if (req.method !== "POST") {
-    return res.status(400).json({ error: "Method not allowed" });
-  }
+app.post("/murmur", (req, res) => {
   const newMurmur = {
     body: req.body.body,
     userHandle: req.body.userHandle,
-    createdAt: admin.firestore.Timestamp.fromDate(new Date()),
+    createdAt: new Date().toISOString(),
   };
 
   admin
@@ -50,3 +46,5 @@ exports.createMurmur = functions.https.onRequest((req, res) => {
       console.error(err);
     });
 });
+
+exports.api = functions.region("europe-west1").https.onRequest(app);
