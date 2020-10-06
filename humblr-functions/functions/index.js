@@ -37,11 +37,46 @@ app.get("/murmurs", (req, res) => {
     .catch((err) => console.error(err));
 });
 
-// CREATE MURMUR DOCS
-app.post("/murmur", (req, res) => {
+// MIDDLEWARE
+const FBAuth = (req, res, next) => {
+  let idToken;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer ")
+  ) {
+    idToken = req.headers.authorization.split("Bearer ")[1];
+  } else {
+    console.error("No token found");
+    return res.status(403).json({ error: "Unauthorized" });
+  }
+
+  admin
+    .auth()
+    .verifyIdToken(idToken)
+    .then((decodedToken) => {
+      req.user = decodedToken;
+      return db
+        .collection("users")
+        .where("userId", "==", req.user.uid)
+        .limit(1)
+        .get();
+    })
+    .then((data) => {
+      // Add username property to request user
+      req.user.username = data.docs[0].data().username;
+      return next();
+    })
+    .catch((err) => {
+      console.error("Error while verifying token", err);
+      return res.status(403).json({ err });
+    });
+};
+
+// CREATE MURMUR DOC
+app.post("/murmur", FBAuth, (req, res) => {
   const newMurmur = {
     body: req.body.body,
-    username: req.body.username,
+    username: req.user.username,
     createdAt: new Date().toISOString(),
   };
 
