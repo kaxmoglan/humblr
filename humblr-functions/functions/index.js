@@ -41,7 +41,7 @@ app.get("/murmurs", (req, res) => {
 app.post("/murmur", (req, res) => {
   const newMurmur = {
     body: req.body.body,
-    userHandle: req.body.userHandle,
+    username: req.body.username,
     createdAt: new Date().toISOString(),
   };
 
@@ -73,7 +73,7 @@ app.post("/signup", (req, res) => {
     email: req.body.email,
     password: req.body.password,
     confirmPassword: req.body.confirmPassword,
-    handle: req.body.handle,
+    username: req.body.username,
   };
 
   // Validation
@@ -85,27 +85,27 @@ app.post("/signup", (req, res) => {
     errors.email = "Must be a valid email address";
   }
 
-  if (isEmpty(newUser.password)) {
-    errors.password = "Must not be empty";
-  }
+  if (isEmpty(newUser.password)) errors.password = "Must not be empty";
+
   if (newUser.password !== newUser.confirmPassword) {
     errors.confirmPassword = "Passwords must match";
   }
-  if (isEmpty(newUser.handle)) {
-    errors.handle = "Must not be empty";
-  }
+
+  if (isEmpty(newUser.username)) errors.username = "Must not be empty";
 
   if (Object.keys(errors).length > 0) return res.status(400).json(errors);
 
   // Validation passed
   let token, userId;
 
-  db.doc(`/users/${newUser.handle}`)
+  db.doc(`/users/${newUser.username}`)
     // Check user exists
     .get()
     .then((doc) => {
       if (doc.exists) {
-        return res.status(400).json({ handle: "This handle is already taken" });
+        return res
+          .status(400)
+          .json({ username: "This username is already taken" });
       } else {
         return firebase
           .auth()
@@ -121,17 +121,14 @@ app.post("/signup", (req, res) => {
       // Asign IdToken to token | create db doc in users collection
       token = idToken;
       const userCredentials = {
-        handle: newUser.handle,
+        username: newUser.username,
         email: newUser.email,
         createdAt: new Date().toISOString(),
         userId,
       };
-      return db.doc(`/users/${newUser.handle}`).set(userCredentials);
+      return db.doc(`/users/${newUser.username}`).set(userCredentials);
     })
-    .then(() => {
-      // Success
-      return res.status(201).json({ token });
-    })
+    .then(() => res.status(201).json({ token }))
     .catch((err) => {
       console.error(err);
       if (err.code === "auth/email-already-in-use") {
@@ -152,12 +149,8 @@ app.post("/login", (req, res) => {
   // Validation
   let errors = {};
 
-  if (isEmpty(user.email)) {
-    errors.email = "Must not be empty";
-  }
-  if (isEmpty(user.password)) {
-    errors.password = "Must not be empty";
-  }
+  if (isEmpty(user.email)) errors.email = "Must not be empty";
+  if (isEmpty(user.password)) errors.password = "Must not be empty";
 
   if (Object.keys(errors).length > 0) {
     return res.status(400).json(errors);
@@ -167,12 +160,8 @@ app.post("/login", (req, res) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(user.email, user.password)
-    .then((data) => {
-      return data.user.getIdToken();
-    })
-    .then((token) => {
-      return res.json({ token });
-    })
+    .then((data) => data.user.getIdToken())
+    .then((token) => res.json({ token }))
     .catch((err) => {
       console.error(err);
       if (err.code === "auth/wrong-password") {
