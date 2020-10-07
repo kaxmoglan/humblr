@@ -26,6 +26,8 @@ module.exports = (req, res, next) => {
     .then((data) => {
       // Add username property to request user
       req.user.username = data.docs[0].data().username;
+      // Add profile picture url to request user
+      req.user.imageUrl = data.docs[0].data().imageUrl;
       return next();
     })
     .catch((err) => {
