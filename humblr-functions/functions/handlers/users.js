@@ -2,6 +2,7 @@ const { admin, db } = require("../util/admin");
 const config = require("../util/config");
 const { validateSignUp, validateLogin } = require("../util/validators");
 const firebase = require("firebase");
+const { nanoid } = require("nanoid");
 firebase.initializeApp(config);
 
 exports.signup = (req, res) => {
@@ -107,9 +108,7 @@ exports.uploadImage = (req, res) => {
       return res.status(400).json({ error: "Wrong file type submitted" });
     }
     const imageExtension = filename.split(".")[filename.split(".").length - 1];
-    imageFileName = `${Math.round(
-      Math.random() * 1000000000
-    )}.${imageExtension}`;
+    imageFileName = `${nanoid()}.${imageExtension}`;
     const filePath = path.join(os.tmpdir(), imageFileName);
     imageToBeUploaded = { filePath, mimetype };
     file.pipe(fs.createWriteStream(filePath));
