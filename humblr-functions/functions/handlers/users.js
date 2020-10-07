@@ -1,10 +1,18 @@
+const firebase = require("firebase");
+const { user } = require("firebase-functions/lib/providers/auth");
+const { nanoid } = require("nanoid");
+
 const { admin, db } = require("../util/admin");
 const config = require("../util/config");
-const { validateSignUp, validateLogin } = require("../util/validators");
-const firebase = require("firebase");
-const { nanoid } = require("nanoid");
+const {
+  validateSignUp,
+  validateLogin,
+  reduceUserDetails,
+} = require("../util/validators");
+
 firebase.initializeApp(config);
 
+// NEW USER SIGN UP
 exports.signup = (req, res) => {
   const newUser = {
     email: req.body.email,
@@ -36,7 +44,7 @@ exports.signup = (req, res) => {
           .createUserWithEmailAndPassword(newUser.email, newUser.password);
       }
     })
-    // Asign user uid to userId & generate IdToken
+    // Assign user uid to userId & generate IdToken
     .then((data) => {
       userId = data.user.uid;
       return data.user.getIdToken();
@@ -64,6 +72,7 @@ exports.signup = (req, res) => {
     });
 };
 
+// LOG USER IN
 exports.login = (req, res) => {
   const user = {
     email: req.body.email,
@@ -92,6 +101,50 @@ exports.login = (req, res) => {
     });
 };
 
+// ADD USER DETAILS
+exports.addUserDetails = (req, res) => {
+  let userDetails = reduceUserDetails(req.body);
+
+  db.doc(`/users/${req.user.username}`)
+    .update(userDetails)
+    .then(() => {
+      return res.json({ message: "Details added successfully" });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+// GET LOGGED-IN USER DETAILS
+exports.getAuthenticatedUser = (req, res) => {
+  let userData = {};
+
+  db.doc(`/users/${req.user.username}`)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        userData.credentials = doc.data();
+        return db
+          .collection("likes")
+          .where("username", "==", req.user.username)
+          .get();
+      }
+    })
+    .then((data) => {
+      userData.likes = [];
+      data.forEach((doc) => {
+        userData.likes.push(doc.data());
+      });
+      return res.json(userData);
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+// UPLOAD USER PROFILE IMAGE
 exports.uploadImage = (req, res) => {
   const BusBoy = require("busboy");
   const path = require("path");
