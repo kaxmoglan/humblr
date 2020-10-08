@@ -1,5 +1,6 @@
 const { db } = require("../util/admin");
 
+// GET ALL MURMURS
 exports.getAllMurmurs = (req, res) => {
   db.collection("murmurs")
     .orderBy("createdAt", "desc")
@@ -17,17 +18,23 @@ exports.getAllMurmurs = (req, res) => {
     .catch((err) => console.error(err));
 };
 
+// POST A MURMUR
 exports.postMurmur = (req, res) => {
   const newMurmur = {
     body: req.body.body,
     username: req.user.username,
+    userImage: req.user.imageUrl,
     createdAt: new Date().toISOString(),
+    likeCount: 0,
+    commentCount: 0,
   };
 
   db.collection("murmurs")
     .add(newMurmur)
     .then((doc) => {
-      res.json({ message: `document ${doc.id} created successfully` });
+      const resMurmur = newMurmur;
+      resMurmur.murmurId = doc.id;
+      res.json(resMurmur);
     })
     .catch((err) => {
       res.status(500).json({ error: "something went wrong" });
@@ -86,7 +93,9 @@ exports.commentOnMurmur = (req, res) => {
       if (!doc.exists) {
         return res.status(404).json({ error: "Murmur not found " });
       }
-
+      return doc.ref.update({ commentCount: doc.data().commentCount + 1 });
+    })
+    .then(() => {
       return db.collection("comments").add(newComment);
     })
     .then(() => {
@@ -95,5 +104,122 @@ exports.commentOnMurmur = (req, res) => {
     .catch((err) => {
       console.error(err);
       res.status(500).json({ error: "Something went wrong" });
+    });
+};
+
+// LIKE MURMUR
+exports.likeMurmur = (req, res) => {
+  const likeDocument = db
+    .collection("likes")
+    .where("username", "==", req.user.username)
+    .where("murmurId", "==", req.params.murmurId)
+    .limit(1);
+
+  const murmurDocument = db.doc(`/murmurs/${req.params.murmurId}`);
+
+  let murmurData;
+
+  murmurDocument
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        murmurData = doc.data();
+        murmurData.murmurId = doc.id;
+        return likeDocument.get();
+      } else {
+        return res.status(404).json({ error: "Murmur not found" });
+      }
+    })
+    .then((data) => {
+      if (data.empty) {
+        return db
+          .collection("likes")
+          .add({
+            murmurId: req.params.murmurId,
+            username: req.user.username,
+          })
+          .then(() => {
+            murmurData.likeCount++;
+            return murmurDocument.update({ likeCount: murmurData.likeCount });
+          })
+          .then(() => {
+            return res.json(murmurData);
+          });
+      } else {
+        return res.status(400).json({ error: "Murmur already liked" });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: err.code });
+    });
+};
+
+// UNLIKE MURMUR
+exports.unlikeMurmur = (req, res) => {
+  const likeDocument = db
+    .collection("likes")
+    .where("username", "==", req.user.username)
+    .where("murmurId", "==", req.params.murmurId)
+    .limit(1);
+
+  const murmurDocument = db.doc(`/murmurs/${req.params.murmurId}`);
+
+  let murmurData;
+
+  murmurDocument
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        murmurData = doc.data();
+        murmurData.murmurId = doc.id;
+        return likeDocument.get();
+      } else {
+        return res.status(404).json({ error: "Murmur not found" });
+      }
+    })
+    .then((data) => {
+      if (data.empty) {
+        return res.status(400).json({ error: "Murmur not liked" });
+      } else {
+        return db
+          .doc(`/likes/${data.docs[0].id}`)
+          .delete()
+          .then(() => {
+            murmurData.likeCount--;
+            return murmurDocument.update({ likeCount: murmurData.likeCount });
+          })
+          .then(() => {
+            res.json(murmurData);
+          });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: err.code });
+    });
+};
+
+// DELETE MURMUR
+exports.deleteMurmur = (req, res) => {
+  const document = db.doc(`/murmurs/${req.params.murmurId}`);
+  document
+    .get()
+    .then((doc) => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Murmur not found" });
+      }
+      if (doc.data().username !== req.user.username) {
+        return res.status(403).json({ error: "Unauthorised" });
+      } else {
+        return document.delete();
+      }
+    })
+    .then(() => {
+      res.json({ message: "Scream deleted successfully" });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
     });
 };
