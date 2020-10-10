@@ -7,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 
 // NAVBAR
-const NavBar = () => {
+const NavBar = (props) => {
   return (
     <AppBar>
       <Toolbar className="nav-container">
