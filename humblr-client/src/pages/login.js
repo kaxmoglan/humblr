@@ -61,10 +61,7 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    const userData = {
-      email: email,
-      password: password,
-    };
+    const userData = { email, password };
     axios
       .post("/login", userData)
       .then((res) => {
