@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: 20,
+    marginBottom: 20,
     position: "relative",
   },
   progress: {
@@ -41,6 +42,11 @@ const useStyles = makeStyles((theme) => ({
   customError: {
     color: "red",
     fontSize: "0.8rem",
+  },
+  signUp: {
+    "&:hover": {
+      color: theme.palette.primary.main,
+    },
   },
 }));
 
@@ -133,9 +139,12 @@ const Login = (props) => {
             )}
           </Button>
           <br />
-          <small>
-            Don't have an account? <Link to="/signup">Sign up here!</Link>
-          </small>
+          <Typography variant="caption">
+            Don't have an account?{" "}
+            <Link className={classes.signUp} to="/signup">
+              Sign up here!
+            </Link>
+          </Typography>
         </form>
       </Grid>
       <Grid item sm />
