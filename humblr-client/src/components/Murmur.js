@@ -1,5 +1,8 @@
 import React from "react";
-import Link from "react-router-dom/Link";
+import { Link } from "react-router-dom";
+
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 // MATERIAL STUFF
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,12 +22,15 @@ const useStyles = makeStyles({
     padding: 25,
   },
   cardImage: {
-    minWidth: 200,
+    maxWidth: 150,
     objectFit: "cover",
+    // borderRadius: 100,
+    // margin: 10,
   },
 });
 
 const Murmur = (props) => {
+  // MATERIAL
   const {
     murmur: {
       body,
@@ -39,9 +45,13 @@ const Murmur = (props) => {
 
   const classes = useStyles();
 
+  // DAYJS
+  dayjs.extend(relativeTime);
+
   return (
     <Card className={classes.card}>
       <CardMedia
+        component="img"
         image={userImage}
         title="Profile image"
         className={classes.cardImage}
@@ -56,7 +66,7 @@ const Murmur = (props) => {
           {username}
         </Typography>
         <Typography variant="body2" color="textSecondary">
-          {createdAt}
+          {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
       </CardContent>

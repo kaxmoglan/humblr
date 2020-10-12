@@ -11,7 +11,7 @@ const Home = (props) => {
     axios
       .get("/murmurs")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMurmursState({
           murmurs: res.data,
         });
@@ -20,7 +20,9 @@ const Home = (props) => {
   }, []);
 
   let recentMurmursMarkup = murmursState ? (
-    murmursState.murmurs.map((murmur) => <Murmur murmur={murmur} />)
+    murmursState.murmurs.map((murmur) => (
+      <Murmur key={murmur.murmurId} murmur={murmur} />
+    ))
   ) : (
     <p>Loading...</p>
   );
@@ -31,7 +33,7 @@ const Home = (props) => {
         <p>PROFILE</p>
       </Grid>
       <Grid item sm={8} xs={12}>
-        <p>{recentMurmursMarkup}</p>
+        {recentMurmursMarkup}
       </Grid>
     </Grid>
   );
