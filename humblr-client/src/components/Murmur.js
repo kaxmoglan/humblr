@@ -24,13 +24,11 @@ const useStyles = makeStyles({
   cardImage: {
     maxWidth: 150,
     objectFit: "cover",
-    // borderRadius: 100,
-    // margin: 10,
   },
 });
 
 const Murmur = (props) => {
-  // MATERIAL
+  // Redux
   const {
     murmur: {
       body,

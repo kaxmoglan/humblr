@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 
 import Murmur from "../components/Murmur";
+import Profile from "../components/Profile";
 
 const Home = (props) => {
   const [murmursState, setMurmursState] = useState(null);
@@ -30,7 +31,7 @@ const Home = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item sm={4} xs={12}>
-        <p>PROFILE</p>
+        <Profile />
       </Grid>
       <Grid item sm={8} xs={12}>
         {recentMurmursMarkup}
