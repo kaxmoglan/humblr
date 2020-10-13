@@ -1,4 +1,4 @@
-export default {
+export default (theme) => ({
   form: {
     textAlign: "center",
   },
@@ -26,7 +26,7 @@ export default {
   },
   signUp: {
     "&:hover": {
-      color: "#00bcd4",
+      color: theme.palette.primary.main,
     },
   },
-};
+});
