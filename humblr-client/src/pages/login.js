@@ -23,14 +23,16 @@ const Login = (props) => {
   // State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [errors, setErrors] = useState({});
 
   // Redux
   const {
     UI: { loading },
   } = props;
 
-  const errors = useSelector((state) => state.UI.errors);
+  let errors = useSelector((state) => state.UI.errors);
+  if (errors.errors) {
+    errors = errors.errors;
+  }
 
   // Material
   const classes = useStyles();
