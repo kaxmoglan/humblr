@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import AppLogo from "../images/logo.png";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import FormStyles from "../util/FormStyles";
 
@@ -25,10 +24,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
 
   // Redux
-  const {
-    UI: { loading },
-  } = props;
-
+  const loading = useSelector((state) => state.UI.loading);
   let errors = useSelector((state) => state.UI.errors);
   if (errors.errors) {
     errors = errors.errors;
