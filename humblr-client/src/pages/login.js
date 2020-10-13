@@ -4,6 +4,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import FormStyles from "../util/FormStyles";
 
+// REDUX
+import { connect, useSelector } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
+
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -19,8 +23,14 @@ const Login = (props) => {
   // State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
+
+  // Redux
+  const {
+    UI: { loading },
+  } = props;
+
+  const errors = useSelector((state) => state.UI.errors);
 
   // Material
   const classes = useStyles();
@@ -28,25 +38,8 @@ const Login = (props) => {
   // Handlers
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-
     const userData = { email, password };
-
-    axios
-      .post("/login", userData)
-      .then((res) => {
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        setLoading(false);
-        props.history.push("/");
-      })
-      .catch((err) => {
-        if (err.response.data.errors) {
-          setErrors(err.response.data.errors);
-        } else if (err.response.data.general) {
-          setErrors(err.response.data);
-        }
-        setLoading(false);
-      });
+    props.loginUser(userData, props.history);
   };
 
   const handleEmail = (e) => {
@@ -121,4 +114,13 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionsToProps = {
+  loginUser,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Login);
