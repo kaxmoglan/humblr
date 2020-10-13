@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import AppLogo from "../images/logo.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { FormStyles } from "./styles/FormStyles";
 
-// Material
+// MATERIAL
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -11,60 +12,30 @@ import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-  },
-  form: {
-    textAlign: "center",
-  },
-  pageTitle: {
-    margin: "10px auto 10px auto",
-  },
-  image: {
-    width: 75,
-    margin: "20px auto 20px auto",
-  },
-  textField: {
-    margin: "10px auto 10px auto",
-  },
-  button: {
-    marginTop: 20,
-    marginBottom: 20,
-    position: "relative",
-  },
-  progress: {
-    position: "absolute",
-  },
-  customError: {
-    color: "red",
-    fontSize: "0.8rem",
-  },
-  signUp: {
-    "&:hover": {
-      color: theme.palette.primary.main,
-    },
-  },
-}));
+const useStyles = makeStyles(FormStyles);
 
+// COMPONENT
 const Login = (props) => {
+  // State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Material
   const classes = useStyles();
 
+  // Handlers
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+
     const userData = { email, password };
+
     axios
       .post("/login", userData)
       .then((res) => {
+        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
         setLoading(false);
         props.history.push("/");
       })
@@ -85,6 +56,7 @@ const Login = (props) => {
     setPassword(e.target.value);
   };
 
+  // Return
   return (
     <Grid container className={classes.form}>
       <Grid item sm />
