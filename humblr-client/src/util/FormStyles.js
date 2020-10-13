@@ -1,4 +1,4 @@
-export const FormStyles = {
+export default {
   form: {
     textAlign: "center",
   },

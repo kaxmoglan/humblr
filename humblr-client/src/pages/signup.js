@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AppLogo from "../images/logo.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { FormStyles } from "./styles/FormStyles";
+import FormStyles from "../util/FormStyles";
 
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";

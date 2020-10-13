@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import ThemeFile from "./util/Theme";
 
 // COMPONENTS
 import NavBar from "./components/NavBar";
@@ -12,22 +13,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 // CUSTOM MATERIAL THEME
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#33c9dc",
-      main: "#00bcd4",
-      dark: "#008394",
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: "#ff6333",
-      main: "#ff3d00",
-      dark: "#b22a00",
-      contrastText: "#fff",
-    },
-  },
-});
+const theme = createMuiTheme(ThemeFile);
 
 function App() {
   return (
