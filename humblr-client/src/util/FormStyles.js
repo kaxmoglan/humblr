@@ -29,4 +29,7 @@ export default (theme) => ({
       color: theme.palette.primary.main,
     },
   },
+  editBioButton: {
+    float: 'right'
+  }
 });

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
 
+import EditDetails from './EditDetails';
+
 // REDUX
 import { connect } from "react-redux";
 import { logoutUser, uploadImage } from '../redux/actions/userActions';
@@ -19,6 +21,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import EditIcon from '@material-ui/icons/Edit';
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -95,6 +98,10 @@ const Profile = (props) => {
     imageUpload.click();
   }
 
+  const handleLogout = () => {
+    props.logoutUser();
+  }
+
   // Render
   let profileMarkup = !loading ? (
     authenticated ? (
@@ -146,6 +153,12 @@ const Profile = (props) => {
             {"  "}
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
+          <Tooltip title="Log Out" placement="top">
+            <IconButton onClick={handleLogout}>
+              <KeyboardReturnIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+          <EditDetails />
         </div>
       </Paper>
     ) : (
