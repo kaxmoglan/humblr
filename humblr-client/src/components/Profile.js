@@ -1,19 +1,24 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
+
+// REDUX
+import { connect } from "react-redux";
+import { logoutUser, uploadImage } from '../redux/actions/userActions';
 
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import MuiLink from "@material-ui/core/Link";
-import { Typography } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import Tooltip from '@material-ui/core/Tooltip';
 // Icons
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -76,6 +81,20 @@ const Profile = (props) => {
     },
   } = props;
 
+  // Handlers
+  const handleImageChange = (e) => {
+    const image = e.target.files[0];
+    // send to server
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+    props.uploadImage(formData);
+  }
+
+  const handleEditPicture = () => {
+    const imageUpload = document.querySelector('#image-upload');
+    imageUpload.click();
+  }
+
   // Render
   let profileMarkup = !loading ? (
     authenticated ? (
@@ -87,6 +106,12 @@ const Profile = (props) => {
               alt="Profile Picture"
               className="profile-image"
             />
+            <input type="file" name="image-upload" id="image-upload" hidden="hidden" onChange={handleImageChange}/>
+            <Tooltip title="Edit profile picture" placement="top">
+              <IconButton onClick={handleEditPicture} className="button">
+                <EditIcon color="primary"/>
+              </IconButton>
+            </Tooltip>
           </div>
           <hr />
           <div className="profile-details">
@@ -155,8 +180,10 @@ const Profile = (props) => {
   return profileMarkup;
 };
 
+const mapActionsToProps = {logoutUser, uploadImage};
+
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, mapActionsToProps)(Profile);
