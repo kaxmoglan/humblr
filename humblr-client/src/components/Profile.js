@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
 
-import EditDetails from './EditDetails';
+import EditProfile from './EditProfile';
+import CustomBtn from '../util/CustomBtn';
 
 // REDUX
 import { connect } from "react-redux";
@@ -13,9 +14,8 @@ import { logoutUser, uploadImage } from '../redux/actions/userActions';
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import MuiLink from "@material-ui/core/Link";
-import { IconButton, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Tooltip from '@material-ui/core/Tooltip';
 // Icons
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
@@ -114,11 +114,9 @@ const Profile = (props) => {
               className="profile-image"
             />
             <input type="file" name="image-upload" id="image-upload" hidden="hidden" onChange={handleImageChange}/>
-            <Tooltip title="Edit profile picture" placement="top">
-              <IconButton onClick={handleEditPicture} className="button">
-                <EditIcon color="primary"/>
-              </IconButton>
-            </Tooltip>
+            <CustomBtn tip="Edit profile picture" onClick={handleEditPicture} btnClassName="button">
+              <EditIcon color="primary"/>
+            </CustomBtn>
           </div>
           <hr />
           <div className="profile-details">
@@ -153,12 +151,10 @@ const Profile = (props) => {
             {"  "}
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
-          <Tooltip title="Log Out" placement="top">
-            <IconButton onClick={handleLogout}>
-              <KeyboardReturnIcon color="primary" />
-            </IconButton>
-          </Tooltip>
-          <EditDetails />
+          <CustomBtn tip="Log Out" onClick={handleLogout}>
+              <KeyboardReturnIcon color="primary"/>
+            </CustomBtn>
+          <EditProfile />
         </div>
       </Paper>
     ) : (

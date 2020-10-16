@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CustomBtn from '../util/CustomBtn';
 
 // REDUX
 import { connect } from 'react-redux';
@@ -12,8 +13,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {Tooltip} from '@material-ui/core';
-import {IconButton} from "@material-ui/core";
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -22,7 +21,7 @@ import FormStyles from "../util/FormStyles";
 const useStyles = makeStyles(FormStyles);
 
 // COMPONENT
-const EditDetails = (props) => {
+const EditProfile = (props) => {
   // State
   const [bio, setBio] = useState('');
   const [website, setWebsite] = useState('');
@@ -79,11 +78,9 @@ const EditDetails = (props) => {
   // Render
   return (
     <>
-      <Tooltip title="Edit your profile" placement="top">
-        <IconButton onClick={handleOpen} className={classes.editBioButton}>
-          <EditIcon color="primary"/>
-        </IconButton>
-      </Tooltip>
+      <CustomBtn tip="Edit your profile" onClick={handleOpen} btnClassName={classes.editBioButton}>
+        <EditIcon color="primary" />
+      </CustomBtn>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -139,4 +136,4 @@ const mapStateToProps = (state) => ({
   credentials: state.user.credentials
 })
 
-export default connect(mapStateToProps, {editUserDetails})(EditDetails);
+export default connect(mapStateToProps, {editUserDetails})(EditProfile);
