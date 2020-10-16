@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
+import PropTypes from 'prop-types';
 
 import Murmur from "../components/Murmur";
 import Profile from "../components/Profile";
 
+import { connect } from 'react-redux';
+import { getMurmurs } from '../redux/actions/dataActions';
+
 const Home = (props) => {
-  const [murmursState, setMurmursState] = useState(null);
+  const { murmurs, loading } = props.data;
 
   useEffect(() => {
-    axios
-      .get("/murmurs")
-      .then((res) => {
-        // console.log(res.data);
-        setMurmursState({
-          murmurs: res.data,
-        });
-      })
-      .catch((err) => console.log(err));
+    props.getMurmurs();
   }, []);
 
-  let recentMurmursMarkup = murmursState ? (
-    murmursState.murmurs.map((murmur) => (
-      <Murmur key={murmur.murmurId} murmur={murmur} />
-    ))
-  ) : (
-    <p>Loading...</p>
-  );
+  let recentMurmursMarkup = !loading ? (
+      murmurs.map((murmur) => 
+        <Murmur key={murmur.murmurId} murmur={murmur} />
+      )
+    ) : <p>Loading...</p>;
 
   return (
     <Grid container spacing={2}>
@@ -40,4 +33,13 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+Home.propTypes = {
+  getMurmurs: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  data: state.data
+})
+
+export default connect(mapStateToProps, { getMurmurs })(Home);

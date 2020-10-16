@@ -20,8 +20,8 @@ import Button from "@material-ui/core/Button";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -115,7 +115,7 @@ const Profile = (props) => {
             />
             <input type="file" name="image-upload" id="image-upload" hidden="hidden" onChange={handleImageChange}/>
             <CustomBtn tip="Edit profile picture" onClick={handleEditPicture} btnClassName="button">
-              <EditIcon color="primary"/>
+              <AddAPhotoIcon color="primary"/>
             </CustomBtn>
           </div>
           <hr />

@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+
+import CustomBtn from '../util/CustomBtn';
+
+import { connect } from 'react-redux';
+import { likeMurmur, unlikeMurmur } from '../redux/actions/dataActions';
 
 // MATERIAL STUFF
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,6 +18,10 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Typography } from "@material-ui/core";
+// Icons
+import ChatIcon from '@material-ui/icons/Chat';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles({
   card: {
@@ -39,9 +49,43 @@ const Murmur = (props) => {
       likeCount,
       commentCount,
     },
+    user: {
+      authenticated
+    }
   } = props;
 
   const classes = useStyles();
+
+  // Like Methods
+  const likedMurmur = () => {
+    if(props.user.likes && props.user.likes.find(like => like.murmurId === props.murmur.murmurId)) {
+      return true;
+    } else return false;
+  }
+  const likeMurmur = () => {
+    props.likeMurmur(props.murmur.murmurId);
+  }
+  const unlikeMurmur = () => {
+    props.unlikeMurmur(props.murmur.murmurId);
+  }
+
+  const likeBtn = !authenticated ? (
+    <Link to="/login">
+      <CustomBtn tip="Like">
+        <FavoriteBorderIcon color="primary" />
+      </CustomBtn>
+    </Link>
+  ) : (
+    likedMurmur() ? (
+      <CustomBtn tip="Unlike" onClick={unlikeMurmur}>
+        <FavoriteIcon color="primary" />
+      </CustomBtn>
+    ) : (
+      <CustomBtn tip="Like" onClick={likeMurmur}>
+        <FavoriteBorderIcon color="primary" />
+      </CustomBtn>
+    )
+  )
 
   // DAYJS
   dayjs.extend(relativeTime);
@@ -67,9 +111,31 @@ const Murmur = (props) => {
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
+        {likeBtn}
+        <span>{likeCount} Likes</span>
+        <CustomBtn tip="Comments">
+          <ChatIcon color="primary"/>
+        </CustomBtn>
+        <span>{commentCount} Comments</span>
       </CardContent>
     </Card>
   );
 };
 
-export default Murmur;
+Murmur.propTypes = {
+  likeMurmur: PropTypes.func.isRequired,
+  unlikeMurmur: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  murmur: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  user: state.user,
+  
+})
+
+const mapActionsToProps = {
+  likeMurmur, unlikeMurmur
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Murmur);

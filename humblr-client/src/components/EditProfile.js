@@ -15,7 +15,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
-
 import FormStyles from "../util/FormStyles";
 
 const useStyles = makeStyles(FormStyles);
@@ -78,7 +77,7 @@ const EditProfile = (props) => {
   // Render
   return (
     <>
-      <CustomBtn tip="Edit your profile" onClick={handleOpen} btnClassName={classes.editBioButton}>
+      <CustomBtn tip="Edit Profile" onClick={handleOpen} btnClassName={classes.editBioButton}>
         <EditIcon color="primary" />
       </CustomBtn>
       <Dialog

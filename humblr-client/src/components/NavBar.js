@@ -36,7 +36,7 @@ const NavBar = (props) => {
       <Toolbar className="nav-container">
         {authenticated ? (
           <>
-            <CustomBtn tip="Post a new Murmur" btnClassName={classes.navBarSVG}>
+            <CustomBtn tip="New Murmur" btnClassName={classes.navBarSVG}>
               <AddIcon/>
             </CustomBtn>
             <Link to="/">
