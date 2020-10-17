@@ -1,32 +1,47 @@
-import { SET_MURMURS, LIKE_MURMUR, UNLIKE_MURMUR, LOADING_DATA } from '../types';
+import {
+  SET_MURMURS,
+  LIKE_MURMUR,
+  UNLIKE_MURMUR,
+  LOADING_DATA,
+  DELETE_MURMUR,
+} from "../types";
 
 const initialState = {
   murmurs: [],
   murmur: {},
-  loading: false
-}
+  loading: false,
+};
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOADING_DATA:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     case SET_MURMURS:
       return {
         ...state,
         murmurs: action.payload,
-        loading: false
-      }
+        loading: false,
+      };
     case LIKE_MURMUR:
     case UNLIKE_MURMUR:
-      let index = state.murmurs.findIndex((murmur) => murmur.murmurId === action.payload.murmurId);
+      let index = state.murmurs.findIndex(
+        (murmur) => murmur.murmurId === action.payload.murmurId
+      );
       state.murmurs[index] = action.payload;
       return {
         ...state,
-      }
+      };
+    case DELETE_MURMUR:
+      return {
+        ...state,
+        murmurs: state.murmurs.filter(
+          (murmur) => murmur.murmurId !== action.payload
+        ),
+      };
     default:
       return state;
   }
-}
+};

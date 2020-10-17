@@ -10,8 +10,9 @@ export const LOADING_UI = "LOADING_UI";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 // DATA REDUCER TYPES
-export const SET_MURMURS = 'SET_MURMURS';
-export const SET_MURMUR = 'SET_MURMUR';
-export const LOADING_DATA = 'LOADING_DATA';
-export const LIKE_MURMUR = 'LIKE_MURMUR';
-export const UNLIKE_MURMUR = 'UNLIKE_MURMUR';
+export const SET_MURMURS = "SET_MURMURS";
+export const SET_MURMUR = "SET_MURMUR";
+export const LOADING_DATA = "LOADING_DATA";
+export const LIKE_MURMUR = "LIKE_MURMUR";
+export const UNLIKE_MURMUR = "UNLIKE_MURMUR";
+export const DELETE_MURMUR = "DELETE_MURMUR";

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
 
-import EditProfile from './EditProfile';
-import CustomBtn from '../util/CustomBtn';
+import EditProfile from "./EditProfile";
+import CustomBtn from "../util/CustomBtn";
 
 // REDUX
 import { connect } from "react-redux";
-import { logoutUser, uploadImage } from '../redux/actions/userActions';
+import { logoutUser, uploadImage } from "../redux/actions/userActions";
 
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,8 +20,8 @@ import Button from "@material-ui/core/Button";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import KeyboardReturnIcon from "@material-ui/icons/KeyboardReturn";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
       margin: "20px 10px",
     },
   },
+  websiteLink: {
+    wordWrap: "break-word",
+  },
 }));
 
 const Profile = (props) => {
@@ -89,18 +92,18 @@ const Profile = (props) => {
     const image = e.target.files[0];
     // send to server
     const formData = new FormData();
-    formData.append('image', image, image.name);
+    formData.append("image", image, image.name);
     props.uploadImage(formData);
-  }
+  };
 
   const handleEditPicture = () => {
-    const imageUpload = document.querySelector('#image-upload');
+    const imageUpload = document.querySelector("#image-upload");
     imageUpload.click();
-  }
+  };
 
   const handleLogout = () => {
     props.logoutUser();
-  }
+  };
 
   // Render
   let profileMarkup = !loading ? (
@@ -113,9 +116,19 @@ const Profile = (props) => {
               alt="Profile Picture"
               className="profile-image"
             />
-            <input type="file" name="image-upload" id="image-upload" hidden="hidden" onChange={handleImageChange}/>
-            <CustomBtn tip="Edit profile picture" onClick={handleEditPicture} btnClassName="button">
-              <AddAPhotoIcon color="primary"/>
+            <input
+              type="file"
+              name="image-upload"
+              id="image-upload"
+              hidden="hidden"
+              onChange={handleImageChange}
+            />
+            <CustomBtn
+              tip="Edit profile picture"
+              onClick={handleEditPicture}
+              btnClassName="button"
+            >
+              <AddAPhotoIcon color="primary" />
             </CustomBtn>
           </div>
           <hr />
@@ -140,7 +153,12 @@ const Profile = (props) => {
             {website && (
               <>
                 <LinkIcon color="primary" />
-                <a href={website} target="_blank" rel="noopener noreferrer">
+                <a
+                  className={classes.websiteLink}
+                  href={website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {"  "}
                   {website}
                 </a>
@@ -152,8 +170,8 @@ const Profile = (props) => {
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
           <CustomBtn tip="Log Out" onClick={handleLogout}>
-              <KeyboardReturnIcon color="primary"/>
-            </CustomBtn>
+            <KeyboardReturnIcon color="primary" />
+          </CustomBtn>
           <EditProfile />
         </div>
       </Paper>
@@ -189,7 +207,7 @@ const Profile = (props) => {
   return profileMarkup;
 };
 
-const mapActionsToProps = {logoutUser, uploadImage};
+const mapActionsToProps = { logoutUser, uploadImage };
 
 const mapStateToProps = (state) => ({
   user: state.user,
