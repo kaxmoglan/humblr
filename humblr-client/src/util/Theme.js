@@ -13,4 +13,7 @@ export default {
       contrastText: "#fff",
     },
   },
+  navBarSVG: {
+    color: "#fff",
+  },
 };

@@ -20,6 +20,10 @@ exports.getAllMurmurs = (req, res) => {
 
 // POST A MURMUR
 exports.postMurmur = (req, res) => {
+  if (req.body.body.trim() === "") {
+    return res.status(400).json({ error: "Must not be empty" });
+  }
+
   const newMurmur = {
     body: req.body.body,
     username: req.user.username,

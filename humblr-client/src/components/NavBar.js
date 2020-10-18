@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import CustomBtn from '../util/CustomBtn';
+import CustomBtn from "../util/CustomBtn";
+import PostMurmur from "./PostMurmur";
 
 // REDUX
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
 // MATERIAL UI
 import AppBar from "@material-ui/core/AppBar";
@@ -13,22 +14,20 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 // Icons
-import AddIcon from '@material-ui/icons/Add';
-import HomeIcon from '@material-ui/icons/Home';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import AddIcon from "@material-ui/icons/Add";
+import HomeIcon from "@material-ui/icons/Home";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
 const useStyles = makeStyles((theme) => ({
   navBarSVG: {
     color: theme.palette.primary.contrastText,
-    outline: false
-  }
+    outline: false,
+  },
 }));
-
 
 // NAVBAR
 const NavBar = (props) => {
-
-  const {authenticated} = props;
+  const { authenticated } = props;
   const classes = useStyles();
 
   return (
@@ -36,16 +35,14 @@ const NavBar = (props) => {
       <Toolbar className="nav-container">
         {authenticated ? (
           <>
-            <CustomBtn tip="New Murmur" btnClassName={classes.navBarSVG}>
-              <AddIcon/>
-            </CustomBtn>
+            <PostMurmur />
             <Link to="/">
               <CustomBtn tip="Home" btnClassName={classes.navBarSVG}>
-                <HomeIcon/>
+                <HomeIcon />
               </CustomBtn>
             </Link>
             <CustomBtn tip="Notifications" btnClassName={classes.navBarSVG}>
-              <NotificationsIcon/>
+              <NotificationsIcon />
             </CustomBtn>
           </>
         ) : (
@@ -67,11 +64,11 @@ const NavBar = (props) => {
 };
 
 NavBar.propTypes = {
-  authenticated: PropTypes.bool.isRequired
-}
+  authenticated: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state) => ({
-  authenticated: state.user.authenticated
-})
+  authenticated: state.user.authenticated,
+});
 
 export default connect(mapStateToProps)(NavBar);

@@ -4,6 +4,7 @@ import {
   UNLIKE_MURMUR,
   LOADING_DATA,
   DELETE_MURMUR,
+  POST_MURMUR,
 } from "../types";
 
 const initialState = {
@@ -40,6 +41,11 @@ export default (state = initialState, action) => {
         murmurs: state.murmurs.filter(
           (murmur) => murmur.murmurId !== action.payload
         ),
+      };
+    case POST_MURMUR:
+      return {
+        ...state,
+        murmurs: [action.payload, ...state.murmurs],
       };
     default:
       return state;

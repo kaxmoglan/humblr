@@ -16,3 +16,4 @@ export const LOADING_DATA = "LOADING_DATA";
 export const LIKE_MURMUR = "LIKE_MURMUR";
 export const UNLIKE_MURMUR = "UNLIKE_MURMUR";
 export const DELETE_MURMUR = "DELETE_MURMUR";
+export const POST_MURMUR = "POST_MURMUR";
