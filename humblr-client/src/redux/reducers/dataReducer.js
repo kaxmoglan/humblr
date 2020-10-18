@@ -1,5 +1,6 @@
 import {
   SET_MURMURS,
+  SET_MURMUR,
   LIKE_MURMUR,
   UNLIKE_MURMUR,
   LOADING_DATA,
@@ -25,6 +26,11 @@ export default (state = initialState, action) => {
         ...state,
         murmurs: action.payload,
         loading: false,
+      };
+    case SET_MURMUR:
+      return {
+        ...state,
+        murmur: action.payload,
       };
     case LIKE_MURMUR:
     case UNLIKE_MURMUR:

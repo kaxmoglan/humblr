@@ -7,6 +7,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 import CustomBtn from "../util/CustomBtn";
 import DeleteMurmur from "./DeleteMurmur";
+import MurmurDialog from "./MurmurDialog";
 
 import { connect } from "react-redux";
 import { likeMurmur, unlikeMurmur } from "../redux/actions/dataActions";
@@ -128,6 +129,7 @@ const Murmur = (props) => {
         </CustomBtn>
         <span>{commentCount}</span>
         {deleteBtn}
+        <MurmurDialog murmurId={murmurId} username={username} />
       </CardContent>
     </Card>
   );

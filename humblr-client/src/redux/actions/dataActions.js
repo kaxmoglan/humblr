@@ -1,10 +1,12 @@
 import {
+  SET_MURMUR,
   SET_MURMURS,
   LOADING_DATA,
   LIKE_MURMUR,
   UNLIKE_MURMUR,
   DELETE_MURMUR,
   LOADING_UI,
+  STOP_LOADING_UI,
   CLEAR_ERRORS,
   SET_ERRORS,
   POST_MURMUR,
@@ -22,6 +24,18 @@ export const getMurmurs = () => (dispatch) => {
     .catch((err) => {
       dispatch({ type: SET_MURMURS, payload: [] });
     });
+};
+
+// GET MURMUR
+export const getMurmur = (murmurId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .get(`/murmur/${murmurId}`)
+    .then((res) => {
+      dispatch({ type: SET_MURMUR, payload: res.data });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch((err) => console.log(err));
 };
 
 // POST MURMUR
