@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-import CustomBtn from "../util/CustomBtn";
+import CustomBtn from "../../util/CustomBtn";
 import DeleteMurmur from "./DeleteMurmur";
 import MurmurDialog from "./MurmurDialog";
 import LikeButton from "./LikeButton";

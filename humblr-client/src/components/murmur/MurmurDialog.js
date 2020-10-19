@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 
 import dayjs from "dayjs";
 
-import CustomBtn from "../util/CustomBtn";
+import CustomBtn from "../../util/CustomBtn";
 import LikeButton from "./LikeButton";
 
 // REDUX
 import { connect, useSelector } from "react-redux";
-import { getMurmur } from "../redux/actions/dataActions";
+import { getMurmur } from "../../redux/actions/dataActions";
 
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";

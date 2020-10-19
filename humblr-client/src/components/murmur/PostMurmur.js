@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import PropTypes from "prop-types";
 
-import CustomBtn from "../util/CustomBtn";
+import CustomBtn from "../../util/CustomBtn";
 
 // REDUX
 import { connect, useSelector } from "react-redux";
-import { postMurmur, clearErrors } from "../redux/actions/dataActions";
+import { postMurmur, clearErrors } from "../../redux/actions/dataActions";
 
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";

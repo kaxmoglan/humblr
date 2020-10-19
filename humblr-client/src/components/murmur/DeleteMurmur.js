@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import CustomBtn from "../util/CustomBtn";
+import CustomBtn from "../../util/CustomBtn";
 
 import { connect } from "react-redux";
-import { deleteMurmur } from "../redux/actions/dataActions";
+import { deleteMurmur } from "../../redux/actions/dataActions";
 
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";

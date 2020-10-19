@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import CustomBtn from "../util/CustomBtn";
-import PostMurmur from "./PostMurmur";
+import CustomBtn from "../../util/CustomBtn";
+import PostMurmur from "..//murmur/PostMurmur";
 
 // REDUX
 import { connect } from "react-redux";

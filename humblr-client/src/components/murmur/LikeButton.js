@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import CustomBtn from "../util/CustomBtn";
+import CustomBtn from "../../util/CustomBtn";
 
 // REDUX
 import { connect } from "react-redux";
-import { likeMurmur, unlikeMurmur } from "../redux/actions/dataActions";
+import { likeMurmur, unlikeMurmur } from "../../redux/actions/dataActions";
 
 // MATERIAL
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
