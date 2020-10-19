@@ -43,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
   dialogContent: {
     padding: 20,
   },
+  progress: {
+    position: "relative",
+    left: "45%",
+    marginTop: 50,
+    marginBottom: 50,
+  },
 }));
 
 // RENDER
@@ -76,7 +82,7 @@ const MurmurDialog = (props) => {
 
   // Markup
   const dialogMarkup = loading ? (
-    <CircularProgress size={100} />
+    <CircularProgress className={classes.progress} size={60} />
   ) : (
     <Grid container spacing={2}>
       <Grid item sm={5}>
