@@ -8,9 +8,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import CustomBtn from "../util/CustomBtn";
 import DeleteMurmur from "./DeleteMurmur";
 import MurmurDialog from "./MurmurDialog";
+import LikeButton from "./LikeButton";
 
 import { connect } from "react-redux";
-import { likeMurmur, unlikeMurmur } from "../redux/actions/dataActions";
 
 // MATERIAL STUFF
 import { makeStyles } from "@material-ui/core/styles";
@@ -60,39 +60,7 @@ const Murmur = (props) => {
 
   const classes = useStyles();
 
-  // Like Methods
-  const likedMurmur = () => {
-    if (
-      props.user.likes &&
-      props.user.likes.find((like) => like.murmurId === props.murmur.murmurId)
-    ) {
-      return true;
-    } else return false;
-  };
-  const likeMurmur = () => {
-    props.likeMurmur(props.murmur.murmurId);
-  };
-  const unlikeMurmur = () => {
-    props.unlikeMurmur(props.murmur.murmurId);
-  };
-
   // Conditional render components
-  const likeBtn = !authenticated ? (
-    <Link to="/login">
-      <CustomBtn tip="Like">
-        <FavoriteBorderIcon color="primary" />
-      </CustomBtn>
-    </Link>
-  ) : likedMurmur() ? (
-    <CustomBtn tip="Unlike" onClick={unlikeMurmur}>
-      <FavoriteIcon color="primary" />
-    </CustomBtn>
-  ) : (
-    <CustomBtn tip="Like" onClick={likeMurmur}>
-      <FavoriteBorderIcon color="primary" />
-    </CustomBtn>
-  );
-
   const deleteBtn =
     authenticated && credentials.username === username ? (
       <DeleteMurmur murmurId={murmurId} />
@@ -122,7 +90,7 @@ const Murmur = (props) => {
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
-        {likeBtn}
+        <LikeButton murmurId={murmurId} />
         <span>{likeCount}</span>
         <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
           <ChatIcon color="primary" />
@@ -136,8 +104,6 @@ const Murmur = (props) => {
 };
 
 Murmur.propTypes = {
-  likeMurmur: PropTypes.func.isRequired,
-  unlikeMurmur: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   murmur: PropTypes.object.isRequired,
 };
@@ -146,9 +112,4 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const mapActionsToProps = {
-  likeMurmur,
-  unlikeMurmur,
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(Murmur);
+export default connect(mapStateToProps)(Murmur);

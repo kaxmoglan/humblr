@@ -38,6 +38,9 @@ export default (state = initialState, action) => {
         (murmur) => murmur.murmurId === action.payload.murmurId
       );
       state.murmurs[index] = action.payload;
+      if (state.murmur.murmurId === action.payload.murmurId) {
+        state.murmur = action.payload;
+      }
       return {
         ...state,
       };

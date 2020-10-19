@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
 import CustomBtn from "../util/CustomBtn";
+import LikeButton from "./LikeButton";
 
 // REDUX
 import { connect, useSelector } from "react-redux";
@@ -23,6 +24,7 @@ import { Typography } from "@material-ui/core";
 // Icons
 import CloseIcon from "@material-ui/icons/Close";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import ChatIcon from "@material-ui/icons/Chat";
 
 const useStyles = makeStyles((theme) => ({
   seperator: {
@@ -107,6 +109,12 @@ const MurmurDialog = (props) => {
         </Typography>
         <hr className={classes.seperator} />
         <Typography variant="body1">{body}</Typography>
+        <LikeButton murmurId={murmurId} />
+        <span>{likeCount}</span>
+        <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
+          <ChatIcon color="primary" />
+        </CustomBtn>
+        <span>{commentCount}</span>
       </Grid>
     </Grid>
   );
