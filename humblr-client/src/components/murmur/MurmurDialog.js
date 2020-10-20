@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
   createdAt: {
     marginBottom: "13px",
   },
+  noComments: {
+    margin: "0 auto 0 auto",
+  },
 }));
 
 // RENDER
@@ -142,7 +145,13 @@ const MurmurDialog = (props) => {
         </div>
       </Grid>
       <hr className={classes.seperator} />
-      <Comments comments={comments} />
+      {commentCount === 0 ? (
+        <Typography variant="body2" className={classes.noComments}>
+          No comments to display. Be the first to comment!
+        </Typography>
+      ) : (
+        <Comments comments={comments} />
+      )}
     </Grid>
   );
 
