@@ -15,15 +15,27 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
     objectFit: "cover",
     borderRadius: "50%",
+    marginLeft: "41px",
   },
   commentContent: {
     marginLeft: "20px",
+    marginTop: "5px",
   },
   seperator: {
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    display: "block",
     width: "100%",
+    margin: "20px 0 20px 0",
   },
   commentContainer: {
     width: "100%",
+  },
+  commentCreatedAt: {
+    display: "block",
+    marginLeft: "3px",
+  },
+  commentBody: {
+    marginLeft: "3px",
   },
 }));
 
@@ -44,27 +56,33 @@ const Comments = (props) => {
           >
             <Grid item sm={12}>
               <Grid container>
-                <Grid item sm={2}>
+                <Grid item sm={3}>
                   <img
                     src={userImage}
                     alt="comment"
                     className={classes.commentImg}
                   />
                 </Grid>
-                <Grid item sm={9}>
+                <Grid item sm={8}>
                   <div className={classes.commentContent}>
                     <Typography
-                      variant="h5"
+                      variant="h6"
                       component={Link}
                       to={`/users/${username}`}
                       color="primary"
                     >
-                      {username}
+                      @{username}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
+                    <Typography variant="body1" className={classes.commentBody}>
+                      {body}
                     </Typography>
-                    <Typography variant="body1">{body}</Typography>
+                    <Typography
+                      variant="caption"
+                      color="textSecondary"
+                      className={classes.commentCreatedAt}
+                    >
+                      {dayjs(createdAt).format("h:mma, DD MMM YYYY")}
+                    </Typography>
                   </div>
                 </Grid>
               </Grid>

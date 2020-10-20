@@ -29,15 +29,16 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 const useStyles = makeStyles((theme) => ({
   profileImg: {
-    maxWidth: 200,
-    height: 200,
+    maxWidth: 170,
+    height: 170,
     borderRadius: "50%",
     objectFit: "cover",
   },
   closeBtn: {
     position: "absolute",
-    top: "0.5rem",
-    right: "0.5rem",
+    top: "0.1rem",
+    right: "0.1rem",
+    zIndex: "5",
   },
   dialogContent: {
     padding: 20,
@@ -52,6 +53,21 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     borderBottom: "1px solid rgba(0,0,0,0.1)",
     marginBottom: "20px",
+  },
+  commentBtn: {
+    marginLeft: "20px",
+  },
+  murmurInfo: {
+    marginTop: "10px",
+    position: "relative",
+  },
+  socialContainer: {
+    position: "absolute",
+    bottom: "0px",
+    left: "-4px",
+  },
+  createdAt: {
+    marginBottom: "10px",
   },
 }));
 
@@ -90,14 +106,14 @@ const MurmurDialog = (props) => {
     <CircularProgress className={classes.progress} size={60} />
   ) : (
     <Grid container spacing={2}>
-      <Grid item sm={5}>
+      <Grid item sm={4}>
         <img
           src={userImage}
           alt={`${username}'s profile picture`}
           className={classes.profileImg}
         />
       </Grid>
-      <Grid item sm={7}>
+      <Grid item sm={8} className={classes.murmurInfo}>
         <Typography
           component={Link}
           color="primary"
@@ -106,16 +122,24 @@ const MurmurDialog = (props) => {
         >
           @{username}
         </Typography>
-        <Typography variant="body2" color="textSecondary">
-          {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
+        <Typography
+          variant="caption"
+          display="block"
+          gutterBottom="true"
+          color="textSecondary"
+          className={classes.createdAt}
+        >
+          {dayjs(createdAt).format("h:mma, DD MMM YYYY")}
         </Typography>
         <Typography variant="body1">{body}</Typography>
-        <LikeButton murmurId={murmurId} />
-        <span>{likeCount}</span>
-        <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
-          <ChatIcon color="primary" />
-        </CustomBtn>
-        <span>{commentCount}</span>
+        <div className={classes.socialContainer}>
+          <LikeButton murmurId={murmurId} />
+          <span>{likeCount}</span>
+          <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
+            <ChatIcon color="primary" />
+          </CustomBtn>
+          <span>{commentCount}</span>
+        </div>
       </Grid>
       <hr className={classes.seperator} />
       <Comments comments={comments} />
