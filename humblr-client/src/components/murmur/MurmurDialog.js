@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "13px",
   },
   noComments: {
-    margin: "0 auto 0 auto",
+    margin: "0 auto 10px auto",
   },
 }));
 

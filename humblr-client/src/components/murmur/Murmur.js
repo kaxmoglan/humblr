@@ -36,15 +36,18 @@ const useStyles = makeStyles({
     padding: 25,
   },
   cardImage: {
-    width: 150,
+    maxWidth: 150,
     height: 150,
     objectFit: "cover",
-    maxWidth: "100%",
     borderRadius: "50%",
     marginLeft: "25px",
   },
   commentBtn: {
     marginLeft: "0.5rem",
+  },
+  likeComment: {
+    display: "inline-block",
+    marginLeft: "-12px",
   },
 });
 
@@ -95,12 +98,14 @@ const Murmur = (props) => {
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
-        <LikeButton murmurId={murmurId} />
-        <span>{likeCount}</span>
-        <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
-          <ChatIcon color="primary" />
-        </CustomBtn>
-        <span>{commentCount}</span>
+        <div className={classes.likeComment}>
+          <LikeButton murmurId={murmurId} />
+          <span>{likeCount}</span>
+          <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
+            <ChatIcon color="primary" />
+          </CustomBtn>
+          <span>{commentCount}</span>
+        </div>
         {deleteBtn}
         <MurmurDialog murmurId={murmurId} username={username} />
       </CardContent>

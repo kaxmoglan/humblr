@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "41px",
   },
   commentContent: {
-    marginLeft: "20px",
+    marginLeft: "55px",
     marginTop: "5px",
   },
   seperator: {
