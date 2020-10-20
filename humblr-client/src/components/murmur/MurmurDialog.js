@@ -138,7 +138,7 @@ const MurmurDialog = (props) => {
         <div className={classes.socialContainer}>
           <LikeButton murmurId={murmurId} />
           <span>{likeCount}</span>
-          <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
+          <CustomBtn tip="Number of comments" btnClassName={classes.commentBtn}>
             <ChatIcon color="primary" />
           </CustomBtn>
           <span>{commentCount}</span>
@@ -160,10 +160,10 @@ const MurmurDialog = (props) => {
     <>
       <CustomBtn
         onClick={handleOpen}
-        tip="Expand murmur"
+        tip="Comments"
         tipClassName={classes.expandBtn}
       >
-        <MoreHorizIcon color="primary" />
+        <ChatIcon color="primary" />
       </CustomBtn>
       <Dialog
         className={classes.newMurmur}

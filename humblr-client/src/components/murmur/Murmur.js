@@ -101,13 +101,14 @@ const Murmur = (props) => {
         <div className={classes.likeComment}>
           <LikeButton murmurId={murmurId} />
           <span>{likeCount}</span>
-          <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
+          {/* <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
             <ChatIcon color="primary" />
           </CustomBtn>
+          <span>{commentCount}</span> */}
+          <MurmurDialog murmurId={murmurId} username={username} />
           <span>{commentCount}</span>
         </div>
         {deleteBtn}
-        <MurmurDialog murmurId={murmurId} username={username} />
       </CardContent>
     </Card>
   );
