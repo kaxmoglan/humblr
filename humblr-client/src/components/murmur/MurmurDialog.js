@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     left: "-4px",
   },
   createdAt: {
-    marginBottom: "10px",
+    marginBottom: "13px",
   },
 }));
 

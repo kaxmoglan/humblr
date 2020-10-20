@@ -30,13 +30,18 @@ const useStyles = makeStyles({
     display: "flex",
     marginBottom: 20,
     position: "relative",
+    alignItems: "center",
   },
   cardContent: {
     padding: 25,
   },
   cardImage: {
-    maxWidth: 150,
+    width: 150,
+    height: 150,
     objectFit: "cover",
+    maxWidth: "100%",
+    borderRadius: "50%",
+    marginLeft: "25px",
   },
   commentBtn: {
     marginLeft: "0.5rem",
