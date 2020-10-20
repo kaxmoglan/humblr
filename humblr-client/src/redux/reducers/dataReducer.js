@@ -60,11 +60,16 @@ export default (state = initialState, action) => {
         murmurs: [action.payload, ...state.murmurs],
       };
     case SUBMIT_COMMENT:
+      let i = state.murmurs.findIndex(
+        (murmur) => murmur.murmurId === action.payload.murmurId
+      );
+      state.murmurs[i].commentCount = state.murmurs[i].commentCount + 1;
       return {
         ...state,
         murmur: {
           ...state.murmur,
           comments: [action.payload, ...state.murmur.comments],
+          commentCount: state.murmur.commentCount + 1,
         },
       };
     default:

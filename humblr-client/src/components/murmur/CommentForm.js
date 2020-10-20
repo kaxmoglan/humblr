@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   charCount: {
-    width: "38px",
+    width: "35px",
+    textAlign: "left",
   },
 }));
 
@@ -76,7 +77,7 @@ const CommentForm = (props) => {
               color={bodyCount > 100 ? "error" : "textPrimary"}
               className={classes.charCount}
             >
-              {bodyCount}
+              {bodyCount > 0 ? bodyCount : ""}
             </Typography>
             <CircularProgress
               variant="static"

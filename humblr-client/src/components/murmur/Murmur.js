@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -10,7 +10,7 @@ import DeleteMurmur from "./DeleteMurmur";
 import MurmurDialog from "./MurmurDialog";
 import LikeButton from "./LikeButton";
 
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 // MATERIAL STUFF
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 });
 
 const Murmur = (props) => {
-  // Redux
+  // Props
   const {
     murmur: {
       body,
@@ -67,6 +67,11 @@ const Murmur = (props) => {
   } = props;
 
   const classes = useStyles();
+
+  // Redux State
+  const reduxMurmur = useSelector((state) =>
+    state.data.murmurs.filter((murmur) => murmur.murmurId === murmurId)
+  );
 
   // Conditional render components
   const deleteBtn =
@@ -101,12 +106,8 @@ const Murmur = (props) => {
         <div className={classes.likeComment}>
           <LikeButton murmurId={murmurId} />
           <span>{likeCount}</span>
-          {/* <CustomBtn tip="Comments" btnClassName={classes.commentBtn}>
-            <ChatIcon color="primary" />
-          </CustomBtn>
-          <span>{commentCount}</span> */}
           <MurmurDialog murmurId={murmurId} username={username} />
-          <span>{commentCount}</span>
+          <span>{reduxMurmur[0].commentCount}</span>
         </div>
         {deleteBtn}
       </CardContent>

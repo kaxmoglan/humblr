@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "20px 0 20px 0",
   },
+  invisibleSeperator: {
+    marginBottom: "50px",
+    border: "none",
+  },
   commentContainer: {
     width: "100%",
   },
@@ -87,8 +91,10 @@ const Comments = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            {index !== comments.length - 1 && (
+            {index !== comments.length - 1 ? (
               <hr className={classes.seperator} />
+            ) : (
+              <hr className={classes.invisibleSeperator} />
             )}
           </div>
         );

@@ -80,7 +80,7 @@ const MurmurDialog = (props) => {
   // State
   const [open, setOpen] = useState(false);
 
-  // Redux
+  // State
   const loading = useSelector((state) => state.UI.loading);
   const {
     murmur: {
