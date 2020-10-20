@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import CustomBtn from "../../util/CustomBtn";
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 // REDUX
 import { connect, useSelector } from "react-redux";
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   closeBtn: {
     position: "absolute",
     top: "0.1rem",
-    right: "0.1rem",
+    right: "0.5rem",
     zIndex: "5",
   },
   dialogContent: {
@@ -145,6 +146,7 @@ const MurmurDialog = (props) => {
         </div>
       </Grid>
       <hr className={classes.seperator} />
+      <CommentForm murmurId={murmurId} />
       {commentCount === 0 ? (
         <Typography variant="body2" className={classes.noComments}>
           No comments to display. Be the first to comment!

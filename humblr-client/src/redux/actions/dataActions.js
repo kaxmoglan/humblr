@@ -10,6 +10,7 @@ import {
   CLEAR_ERRORS,
   SET_ERRORS,
   POST_MURMUR,
+  SUBMIT_COMMENT,
 } from "../types";
 import axios from "axios";
 
@@ -45,7 +46,7 @@ export const postMurmur = (newMurmur) => (dispatch) => {
     .post("/murmur", newMurmur)
     .then((res) => {
       dispatch({ type: POST_MURMUR, payload: res.data });
-      dispatch({ type: CLEAR_ERRORS });
+      dispatch(clearErrors());
     })
     .catch((err) => {
       dispatch({ type: SET_ERRORS, payload: err.response.data });
@@ -70,6 +71,19 @@ export const unlikeMurmur = (murmurId) => (dispatch) => {
       dispatch({ type: UNLIKE_MURMUR, payload: res.data });
     })
     .catch((err) => console.log(err));
+};
+
+// SUBMIT COMMENT
+export const submitComment = (murmurId, commentData) => (dispatch) => {
+  axios
+    .post(`/murmur/${murmurId}/comment`, commentData)
+    .then((res) => {
+      dispatch({ type: SUBMIT_COMMENT, payload: res.data });
+      dispatch(clearErrors());
+    })
+    .catch((err) => {
+      dispatch({ type: SET_ERRORS, payload: err.response.data });
+    });
 };
 
 // DELETE MURMUR

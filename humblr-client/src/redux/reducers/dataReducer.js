@@ -6,6 +6,7 @@ import {
   LOADING_DATA,
   DELETE_MURMUR,
   POST_MURMUR,
+  SUBMIT_COMMENT,
 } from "../types";
 
 const initialState = {
@@ -34,12 +35,14 @@ export default (state = initialState, action) => {
       };
     case LIKE_MURMUR:
     case UNLIKE_MURMUR:
+      let comments = state.murmur.comments;
       let index = state.murmurs.findIndex(
         (murmur) => murmur.murmurId === action.payload.murmurId
       );
       state.murmurs[index] = action.payload;
       if (state.murmur.murmurId === action.payload.murmurId) {
         state.murmur = action.payload;
+        state.murmur.comments = comments;
       }
       return {
         ...state,
@@ -55,6 +58,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         murmurs: [action.payload, ...state.murmurs],
+      };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        murmur: {
+          ...state.murmur,
+          comments: [action.payload, ...state.murmur.comments],
+        },
       };
     default:
       return state;
