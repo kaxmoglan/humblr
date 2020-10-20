@@ -19,6 +19,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // Icons
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   closeBtn: {
@@ -47,6 +48,12 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     float: "right",
   },
+  charCountSection: {
+    display: "flex",
+  },
+  charCount: {
+    width: "35px",
+  },
 }));
 
 // COMPONENT
@@ -54,6 +61,11 @@ const PostMurmur = (props) => {
   // State
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState("");
+  const [contentLength, setContentLength] = useState(0);
+
+  useEffect(() => {
+    setContentLength(content.length);
+  }, [content]);
 
   // Redux
   const loading = useSelector((state) => state.UI.loading);
@@ -131,7 +143,7 @@ const PostMurmur = (props) => {
               variant="contained"
               color="primary"
               className={classes.submitBtn}
-              disabled={loading}
+              disabled={loading || contentLength > 100}
               onClick={handleSubmit}
             >
               Post
@@ -143,6 +155,21 @@ const PostMurmur = (props) => {
               )}
             </Button>
           </form>
+          <div className={classes.charCountSection}>
+            <Typography
+              variant="body1"
+              color={contentLength > 100 ? "error" : "textPrimary"}
+              className={classes.charCount}
+            >
+              {contentLength}
+            </Typography>
+            <CircularProgress
+              variant="static"
+              value={contentLength > 100 ? 100 : contentLength}
+              size={25}
+              color={contentLength > 100 ? "secondary" : "primary"}
+            />
+          </div>
         </DialogContent>
       </Dialog>
     </>
