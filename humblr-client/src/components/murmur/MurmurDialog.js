@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 
 import CustomBtn from "../../util/CustomBtn";
 import LikeButton from "./LikeButton";
+import Comments from "./Comments";
 
 // REDUX
 import { connect, useSelector } from "react-redux";
@@ -27,10 +28,6 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import ChatIcon from "@material-ui/icons/Chat";
 
 const useStyles = makeStyles((theme) => ({
-  seperator: {
-    border: "none",
-    margin: 4,
-  },
   profileImg: {
     maxWidth: 200,
     height: 200,
@@ -51,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
     marginBottom: 50,
   },
+  seperator: {
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    marginBottom: "20px",
+  },
 }));
 
 // RENDER
@@ -69,6 +71,7 @@ const MurmurDialog = (props) => {
       commentCount,
       userImage,
       username,
+      comments,
     },
   } = props;
 
@@ -103,11 +106,9 @@ const MurmurDialog = (props) => {
         >
           @{username}
         </Typography>
-        <hr className={classes.seperator} />
         <Typography variant="body2" color="textSecondary">
           {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
         </Typography>
-        <hr className={classes.seperator} />
         <Typography variant="body1">{body}</Typography>
         <LikeButton murmurId={murmurId} />
         <span>{likeCount}</span>
@@ -116,6 +117,8 @@ const MurmurDialog = (props) => {
         </CustomBtn>
         <span>{commentCount}</span>
       </Grid>
+      <hr className={classes.seperator} />
+      <Comments comments={comments} />
     </Grid>
   );
 
