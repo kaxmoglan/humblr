@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 
 import EditProfile from "./EditProfile";
 import CustomBtn from "../../util/CustomBtn";
+import ProfileSkeleton from "../../util/ProfileSkeleton";
 
 // REDUX
 import { connect } from "react-redux";
@@ -204,7 +205,7 @@ const Profile = (props) => {
       </Paper>
     )
   ) : (
-    <p>loading...</p>
+    <ProfileSkeleton />
   );
 
   return profileMarkup;

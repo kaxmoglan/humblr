@@ -13,4 +13,9 @@ export default {
       contrastText: "#fff",
     },
   },
+  dickhead: {
+    width: 300,
+    height: 20,
+    backgroundColor: "rgb(0,0,0)",
+  },
 };

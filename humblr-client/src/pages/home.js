@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import Murmur from "../components//murmur/Murmur";
 import Profile from "../components/profile/Profile";
+import MurmurSkeleton from "../util/MurmurSkeleton";
 
 import { connect } from "react-redux";
 import { getMurmurs } from "../redux/actions/dataActions";
@@ -18,7 +19,7 @@ const Home = (props) => {
   let recentMurmursMarkup = !loading ? (
     murmurs.map((murmur) => <Murmur key={murmur.murmurId} murmur={murmur} />)
   ) : (
-    <p>Loading...</p>
+    <MurmurSkeleton />
   );
 
   return (

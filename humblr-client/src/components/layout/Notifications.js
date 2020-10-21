@@ -89,7 +89,9 @@ const Notifications = (props) => {
         );
       })
     ) : (
-      <MenuItem onClick={handleClose}>You have no notifications</MenuItem>
+      <MenuItem onClick={handleClose}>
+        <Typography variant="caption">You have no notifications</Typography>
+      </MenuItem>
     );
 
   return (
@@ -118,7 +120,7 @@ const Notifications = (props) => {
 
 Notifications.propTypes = {
   markNotificationsRead: PropTypes.func.isRequired,
-  notifications: PropTypes.object.isRequired,
+  notifications: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({

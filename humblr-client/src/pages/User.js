@@ -6,6 +6,8 @@ import axios from "axios";
 // COMPONENTS
 import Murmur from "../components/murmur/Murmur";
 import StaticProfile from "../components/profile/StaticProfile";
+import ProfileSkeleton from "../util/ProfileSkeleton";
+import MurmurSkeleton from "../util/MurmurSkeleton";
 
 // REDUX
 import { connect, useSelector } from "react-redux";
@@ -40,7 +42,7 @@ const User = (props) => {
 
   // Markup
   const murmursMarkup = loading ? (
-    <p>Loading...</p>
+    <MurmurSkeleton />
   ) : murmurs.length === 0 ? (
     <p align="center">This user has no Murmurs.</p>
   ) : !murmurIdParam ? (
@@ -58,7 +60,7 @@ const User = (props) => {
     <Grid container spacing={3} justify="center">
       <Grid item md={4} sm={6} xs={12}>
         {profile === null ? (
-          <p>Loading profile...</p>
+          <ProfileSkeleton />
         ) : (
           <StaticProfile profile={profile} />
         )}
