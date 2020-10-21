@@ -12,7 +12,7 @@ import LikeButton from "./LikeButton";
 
 import { connect, useSelector } from "react-redux";
 
-// MATERIAL STUFF
+// MATERIAL
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";

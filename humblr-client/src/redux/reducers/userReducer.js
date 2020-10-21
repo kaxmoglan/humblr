@@ -4,7 +4,8 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   LIKE_MURMUR,
-  UNLIKE_MURMUR
+  UNLIKE_MURMUR,
+  MARK_NOTIFICATIONS_READ,
 } from "../types";
 
 const initialState = {
@@ -42,15 +43,22 @@ export default function (state = initialState, action) {
           ...state.likes,
           {
             username: state.credentials.username,
-            murmurId: action.payload.murmurId
-          }
-        ]
-      }
+            murmurId: action.payload.murmurId,
+          },
+        ],
+      };
     case UNLIKE_MURMUR:
       return {
         ...state,
-        likes: state.likes.filter(like => like.murmurId !== action.payload.murmurId)
-      }
+        likes: state.likes.filter(
+          (like) => like.murmurId !== action.payload.murmurId
+        ),
+      };
+    case MARK_NOTIFICATIONS_READ:
+      state.notifications.forEach((note) => (note.read = true));
+      return {
+        ...state,
+      };
     default:
       return state;
   }

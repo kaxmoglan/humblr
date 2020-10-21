@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import CustomBtn from "../../util/CustomBtn";
 import PostMurmur from "..//murmur/PostMurmur";
+import Notifications from "./Notifications";
 
 // REDUX
 import { connect } from "react-redux";
@@ -44,9 +45,7 @@ const NavBar = (props) => {
               </CustomBtn>
             </Link>
             <PostMurmur />
-            <CustomBtn tip="Notifications" btnClassName={classes.navBarSVG}>
-              <NotificationsIcon />
-            </CustomBtn>
+            <Notifications />
           </>
         ) : (
           <>
