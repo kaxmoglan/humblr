@@ -1,0 +1,72 @@
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+
+import axios from "axios";
+
+// COMPONENTS
+import Murmur from "../components/murmur/Murmur";
+import StaticProfile from "../components/profile/StaticProfile";
+
+// REDUX
+import { connect, useSelector } from "react-redux";
+import { getUserData } from "../redux/actions/dataActions";
+
+// MATERIAL
+import Grid from "@material-ui/core/Grid";
+
+const User = (props) => {
+  // Local State
+  const [profile, setProfile] = useState(null);
+
+  // Props
+  const { murmurs, loading } = props.data;
+
+  // Component did mount
+  useEffect(() => {
+    const username = props.match.params.username;
+    props.getUserData(username);
+
+    axios
+      .get(`/user/${username}`)
+      .then((res) => {
+        setProfile(res.data.user);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // Markup
+  const murmursMarkup = loading ? (
+    <p>Loading...</p>
+  ) : murmurs.length === 0 ? (
+    <p align="center">This user has no Murmurs.</p>
+  ) : (
+    murmurs.map((murmur) => <Murmur key={murmur.murmurId} murmur={murmur} />)
+  );
+
+  // Render
+  return (
+    <Grid container spacing={3} justify="center">
+      <Grid item md={4} sm={6} xs={12}>
+        {profile === null ? (
+          <p>Loading profile...</p>
+        ) : (
+          <StaticProfile profile={profile} />
+        )}
+      </Grid>
+      <Grid item md={8} sm={10} xs={12}>
+        {murmursMarkup}
+      </Grid>
+    </Grid>
+  );
+};
+
+User.propTypes = {
+  getUserData: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  data: state.data,
+});
+
+export default connect(mapStateToProps, { getUserData })(User);

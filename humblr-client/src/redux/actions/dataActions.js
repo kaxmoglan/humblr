@@ -96,7 +96,20 @@ export const deleteMurmur = (murmurId) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-// CLEAR ERRORS
+// GET USER DATA FOR USER PAGE
+export const getUserData = (username) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`/user/${username}`)
+    .then((res) => {
+      dispatch({ type: SET_MURMURS, payload: res.data.murmurs });
+    })
+    .catch(() => {
+      dispatch({ type: SET_MURMURS, payload: null });
+    });
+};
+
+// CLEAR ERRORS FUNCTION
 export const clearErrors = () => (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };

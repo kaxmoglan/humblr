@@ -142,11 +142,12 @@ const Profile = (props) => {
               @{username}
             </MuiLink>
             <hr />
-            {bio && <Typography variant="body2">{bio}</Typography>}
+            {bio && <Typography variant="body1">{bio}</Typography>}
             <hr />
             {location && (
               <>
-                <LocationOnIcon color="primary" /> <span>{location}</span>
+                <LocationOnIcon color="primary" />{" "}
+                <Typography variant="caption">{location}</Typography>
                 <hr />
               </>
             )}
@@ -160,14 +161,16 @@ const Profile = (props) => {
                   rel="noopener noreferrer"
                 >
                   {"  "}
-                  {website}
+                  <Typography variant="caption">{website}</Typography>
                 </a>
                 <hr />
               </>
             )}
             <CalendarTodayIcon color="primary" />
             {"  "}
-            <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
+            <Typography variant="caption">
+              Joined {dayjs(createdAt).format("MMM YYYY")}
+            </Typography>
           </div>
           <CustomBtn tip="Log Out" onClick={handleLogout}>
             <KeyboardReturnIcon color="primary" />

@@ -21,7 +21,10 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 const useStyles = makeStyles((theme) => ({
   navBarSVG: {
     color: theme.palette.primary.contrastText,
-    outline: false,
+    outline: "none",
+  },
+  link: {
+    outline: "none",
   },
 }));
 
@@ -35,12 +38,12 @@ const NavBar = (props) => {
       <Toolbar className="nav-container">
         {authenticated ? (
           <>
-            <PostMurmur />
-            <Link to="/">
+            <Link to="/" className={classes.link}>
               <CustomBtn tip="Home" btnClassName={classes.navBarSVG}>
                 <HomeIcon />
               </CustomBtn>
             </Link>
+            <PostMurmur />
             <CustomBtn tip="Notifications" btnClassName={classes.navBarSVG}>
               <NotificationsIcon />
             </CustomBtn>
