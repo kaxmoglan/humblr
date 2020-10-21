@@ -1,5 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+
 import { connect } from "react-redux";
 
 const AuthRoute = ({ component: Component, authenticated, ...rest }) => (
@@ -10,6 +12,10 @@ const AuthRoute = ({ component: Component, authenticated, ...rest }) => (
     }
   />
 );
+
+AuthRoute.propTypes = {
+  user: PropTypes.object,
+};
 
 const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated,

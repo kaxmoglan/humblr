@@ -104,7 +104,7 @@ const Comments = (props) => {
 };
 
 Comments.propTypes = {
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.array,
 };
 
 export default Comments;

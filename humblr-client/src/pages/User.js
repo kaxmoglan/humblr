@@ -17,6 +17,7 @@ import Grid from "@material-ui/core/Grid";
 const User = (props) => {
   // Local State
   const [profile, setProfile] = useState(null);
+  const [murmurIdParam, setMurmurIdParam] = useState(null);
 
   // Props
   const { murmurs, loading } = props.data;
@@ -25,6 +26,9 @@ const User = (props) => {
   useEffect(() => {
     const username = props.match.params.username;
     props.getUserData(username);
+
+    const murmurId = props.match.params.murmurId;
+    if (murmurId) setMurmurIdParam(murmurId);
 
     axios
       .get(`/user/${username}`)
@@ -39,8 +43,14 @@ const User = (props) => {
     <p>Loading...</p>
   ) : murmurs.length === 0 ? (
     <p align="center">This user has no Murmurs.</p>
-  ) : (
+  ) : !murmurIdParam ? (
     murmurs.map((murmur) => <Murmur key={murmur.murmurId} murmur={murmur} />)
+  ) : (
+    murmurs.map((murmur) => {
+      if (murmur.murmurId !== murmurIdParam) {
+        return <Murmur key={murmur.murmurId} murmur={murmur} />;
+      } else return <Murmur key={murmur.murmurId} murmur={murmur} openDialog />;
+    })
   );
 
   // Render

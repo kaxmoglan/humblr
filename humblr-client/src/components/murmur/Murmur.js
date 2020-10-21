@@ -106,7 +106,11 @@ const Murmur = (props) => {
         <div className={classes.likeComment}>
           <LikeButton murmurId={murmurId} />
           <span>{likeCount}</span>
-          <MurmurDialog murmurId={murmurId} username={username} />
+          <MurmurDialog
+            murmurId={murmurId}
+            username={username}
+            openDialog={props.openDialog}
+          />
           <span>{reduxMurmur[0].commentCount}</span>
         </div>
         {deleteBtn}
@@ -118,6 +122,7 @@ const Murmur = (props) => {
 Murmur.propTypes = {
   user: PropTypes.object.isRequired,
   murmur: PropTypes.object.isRequired,
+  openDialog: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

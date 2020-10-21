@@ -79,6 +79,8 @@ const useStyles = makeStyles((theme) => ({
 const MurmurDialog = (props) => {
   // State
   const [open, setOpen] = useState(false);
+  const [oldPath, setOldPath] = useState("");
+  const [newPath, setNewPath] = useState("");
 
   // State
   const loading = useSelector((state) => state.UI.loading);
@@ -95,15 +97,40 @@ const MurmurDialog = (props) => {
     },
   } = props;
 
+  useEffect(() => {
+    if (props.openDialog) {
+      handleOpen();
+    }
+  }, []);
+
   // Material
   const classes = useStyles();
 
   // Handlers
   const handleOpen = () => {
+    const murmurAuthor = props.username;
+    const openMurmurId = props.murmurId;
+
+    let oldPath = window.location.pathname;
+    const newPath = `/users/${murmurAuthor}/murmur/${openMurmurId}`;
+
+    if (oldPath === newPath) {
+      oldPath = `/users/${murmurAuthor}`;
+    }
+
+    window.history.pushState(null, null, newPath);
+
     setOpen(true);
+    setOldPath(oldPath);
+    setNewPath(newPath);
+
     props.getMurmur(props.murmurId);
   };
-  const handleClose = () => setOpen(false);
+
+  const handleClose = () => {
+    window.history.pushState(null, null, oldPath);
+    setOpen(false);
+  };
 
   // Markup
   const dialogMarkup = loading ? (
