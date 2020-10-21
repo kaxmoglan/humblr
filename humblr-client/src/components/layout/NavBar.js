@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import CustomBtn from "../../util/CustomBtn";
 import PostMurmur from "..//murmur/PostMurmur";
 import Notifications from "./Notifications";
+import Info from "./Info";
 
 // REDUX
 import { connect } from "react-redux";
@@ -17,7 +18,6 @@ import { makeStyles } from "@material-ui/core/styles";
 // Icons
 import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 
 const useStyles = makeStyles((theme) => ({
   navBarSVG: {
@@ -26,6 +26,14 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     outline: "none",
+  },
+  navBar: {
+    width: "100%",
+    margin: "0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
   },
 }));
 
@@ -36,7 +44,7 @@ const NavBar = (props) => {
 
   return (
     <AppBar>
-      <Toolbar className="nav-container">
+      <Toolbar className={classes.navBar}>
         {authenticated ? (
           <>
             <Link to="/" className={classes.link}>
@@ -46,6 +54,7 @@ const NavBar = (props) => {
             </Link>
             <PostMurmur />
             <Notifications />
+            <Info />
           </>
         ) : (
           <>
@@ -58,6 +67,7 @@ const NavBar = (props) => {
             <Button color="inherit" component={Link} to="/signup">
               Sign Up
             </Button>
+            <Info />
           </>
         )}
       </Toolbar>

@@ -24,10 +24,10 @@ const Home = (props) => {
 
   return (
     <Grid container spacing={3} justify="center">
-      <Grid item md={4} sm={6} xs={12}>
+      <Grid item md={4} sm={7} xs={12}>
         <Profile />
       </Grid>
-      <Grid item md={8} sm={10} xs={12}>
+      <Grid item md={7} sm={10} xs={12}>
         {recentMurmursMarkup}
       </Grid>
     </Grid>
