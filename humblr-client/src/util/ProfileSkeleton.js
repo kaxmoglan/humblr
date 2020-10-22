@@ -1,20 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
-
-import profilePic from "../images/default_profile.png";
 
 // MATERIAL
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 
 // Icons
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import KeyboardReturnIcon from "@material-ui/icons/KeyboardReturn";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

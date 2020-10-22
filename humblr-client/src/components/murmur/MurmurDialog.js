@@ -117,18 +117,16 @@ const MurmurDialog = (props) => {
     const murmurAuthor = props.username;
     const openMurmurId = props.murmurId;
 
-    let oldPath = window.location.pathname;
-    const newPath = `/users/${murmurAuthor}/murmur/${openMurmurId}`;
+    setOldPath(window.location.pathname);
+    setNewPath(`/users/${murmurAuthor}/murmur/${openMurmurId}`);
 
     if (oldPath === newPath) {
-      oldPath = `/users/${murmurAuthor}`;
+      setOldPath(`/users/${murmurAuthor}`);
     }
 
     window.history.pushState(null, null, newPath);
 
     setOpen(true);
-    setOldPath(oldPath);
-    setNewPath(newPath);
 
     props.getMurmur(props.murmurId);
   };
@@ -150,7 +148,7 @@ const MurmurDialog = (props) => {
       <Grid item sm={4}>
         <img
           src={userImage}
-          alt={`${username}'s profile picture`}
+          alt={`${username}'s profile`}
           className={classes.profileImg}
         />
       </Grid>
@@ -167,7 +165,7 @@ const MurmurDialog = (props) => {
         <Typography
           variant="caption"
           display="block"
-          gutterBottom="true"
+          gutterBottom={true}
           color="textSecondary"
           className={classes.createdAt}
         >

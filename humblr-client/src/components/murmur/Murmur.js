@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -60,15 +60,7 @@ const useStyles = makeStyles({
 const Murmur = (props) => {
   // Props
   const {
-    murmur: {
-      body,
-      createdAt,
-      userImage,
-      username,
-      murmurId,
-      likeCount,
-      commentCount,
-    },
+    murmur: { body, createdAt, userImage, username, murmurId, likeCount },
     user: { authenticated, credentials },
   } = props;
 

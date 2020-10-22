@@ -18,7 +18,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 // Icons
-import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,11 +51,11 @@ const NavBar = (props) => {
   const classes = useStyles();
 
   return (
-    <AppBar color="#fff">
+    <AppBar color="transparent">
       <Toolbar className={classes.navBar}>
         {authenticated ? (
           <>
-            <img src={logo} className={classes.logo} />
+            <img src={logo} className={classes.logo} alt="Humblr logo" />
             <Link to="/" className={classes.link}>
               <CustomBtn tip="Home" btnClassName={classes.navBarSVG}>
                 <HomeIcon />
@@ -68,7 +67,7 @@ const NavBar = (props) => {
           </>
         ) : (
           <>
-            <img src={logo} className={classes.logo} />
+            <img src={logo} className={classes.logo} alt="Humblr logo" />
             <Button color="inherit" component={Link} to="/">
               Home
             </Button>

@@ -28,9 +28,6 @@ const useStyles = makeStyles((theme) => ({
     top: "0.5rem",
     right: "0.5rem",
   },
-  submitBtn: {
-    position: "relative",
-  },
   progressSpinner: {
     position: "absolute",
   },
@@ -45,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   submitBtn: {
-    marginBottom: "1rem",
     position: "relative",
+    marginBottom: "1rem",
     float: "right",
   },
   charCountSection: {

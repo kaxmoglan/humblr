@@ -11,18 +11,12 @@ import { likeMurmur, unlikeMurmur } from "../../redux/actions/dataActions";
 // MATERIAL
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({}));
 
 const LikeButton = (props) => {
   // Props
   const {
     user: { authenticated },
   } = props;
-
-  // Material
-  const classes = useStyles();
 
   // Handlers
   const likedMurmur = () => {
