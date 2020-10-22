@@ -10,7 +10,7 @@ import ProfileSkeleton from "../util/ProfileSkeleton";
 import MurmurSkeleton from "../util/MurmurSkeleton";
 
 // REDUX
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { getUserData } from "../redux/actions/dataActions";
 
 // MATERIAL

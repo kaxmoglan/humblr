@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
 // MATERIAL
-import MuiLink from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
