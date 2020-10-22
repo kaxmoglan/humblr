@@ -18,7 +18,8 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: 20,
+    padding: 10,
+    boxShadow: "none",
   },
   profile: {
     "& .image-wrapper": {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     height: 22,
     width: "50%",
     backgroundColor: "rgba(0,0,0,0.3)",
-    margin: "0px auto 5px auto",
+    margin: "20px auto 25px auto",
   },
   username: {
     height: 30,

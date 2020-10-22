@@ -10,8 +10,12 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   card: {
     display: "flex",
-    marginBottom: 20,
+    marginBottom: 10,
     alignItems: "center",
+    boxShadow: "none",
+    border: "1px solid rgba(0,0,0,0.5)",
+    borderRadius: 10,
+    paddingBottom: 2,
   },
   cardContent: {
     width: "100%",
@@ -20,8 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     width: 225,
-    height: 150,
-    objectFit: "cover",
+    height: 140,
     borderRadius: "50%",
     marginLeft: "25px",
     backgroundColor: "rgba(0,0,0,0.3)",

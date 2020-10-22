@@ -52,12 +52,21 @@ const DeleteMurmur = (props) => {
         <DeleteOutlineIcon color="secondary" />
       </CustomBtn>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-        <DialogTitle>Are you sure you want to delete this Murmur?</DialogTitle>
-        <DialogActions>
+        <DialogTitle style={{ textAlign: "center" }}>
+          Are you sure you want to delete this Murmur?
+        </DialogTitle>
+        <DialogActions
+          style={{
+            paddingRight: 20,
+            paddingBottom: 20,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleDelete} color="secondary">
+          <Button onClick={handleDelete} variant="contained" color="secondary">
             Delete Murmur
           </Button>
         </DialogActions>

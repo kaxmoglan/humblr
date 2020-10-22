@@ -16,7 +16,8 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: 20,
+    padding: 10,
+    boxShadow: "none",
   },
   profile: {
     "& .image-wrapper": {
@@ -51,6 +52,25 @@ const useStyles = makeStyles((theme) => ({
   },
   websiteLink: {
     wordWrap: "break-word",
+
+    transition: "all 250ms ease",
+    position: "relative",
+    left: "-4px",
+    padding: "6px 6px 6px 2px",
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.05)",
+    },
+  },
+  username: {
+    transition: "all 250ms ease",
+    position: "relative",
+    left: "-6px",
+    padding: 6,
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.05)",
+    },
   },
 }));
 
@@ -71,16 +91,24 @@ const StaticProfile = (props) => {
         </div>
         <hr />
         <div className="profile-details">
-          <MuiLink
+          <Typography
             component={Link}
             to={`/users/${username}`}
             color="primary"
             variant="h5"
+            className={classes.username}
           >
             @{username}
-          </MuiLink>
+          </Typography>
           <hr />
-          {bio && <Typography variant="body1">{bio}</Typography>}
+          {bio && (
+            <Typography
+              variant="body1"
+              style={{ marginBottom: 20, marginTop: 20 }}
+            >
+              {bio}
+            </Typography>
+          )}
           <hr />
           {location && (
             <>

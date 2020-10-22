@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     right: "0.5rem",
   },
   infoBtn: {
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.main,
     outline: "none",
     position: "absolute",
-    right: "3.5rem",
+    right: "2rem",
   },
 }));
 

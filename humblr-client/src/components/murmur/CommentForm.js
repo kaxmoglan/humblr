@@ -29,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
     width: "35px",
     textAlign: "left",
   },
+  textField: {
+    color: theme.palette.primary.highlight,
+  },
+  progress: {
+    color: "#ff3d00",
+  },
 }));
 
 const CommentForm = (props) => {
@@ -68,7 +74,8 @@ const CommentForm = (props) => {
           value={body}
           onChange={handleChange}
           fullWidth
-          className={classes.textField}
+          // className={classes.textField}
+          color="secondary"
         />
         <div className={classes.lowerForm}>
           <div className={classes.charCountSection}>
@@ -83,15 +90,15 @@ const CommentForm = (props) => {
               variant="static"
               value={bodyCount > 100 ? 100 : bodyCount}
               size={20}
-              color={bodyCount > 100 ? "secondary" : "primary"}
+              color="secondary"
             />
           </div>
           <Button
             type="submit"
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.button}
-            disabled={bodyCount > 100 ? true : false}
+            disabled={bodyCount > 100 || bodyCount < 1}
           >
             Comment
           </Button>

@@ -28,9 +28,12 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 const useStyles = makeStyles({
   card: {
     display: "flex",
-    marginBottom: 20,
+    marginBottom: 10,
     position: "relative",
     alignItems: "center",
+    boxShadow: "none",
+    border: "1px solid rgba(0,0,0,0.5)",
+    borderRadius: 10,
   },
   cardContent: {
     padding: 25,
@@ -48,6 +51,16 @@ const useStyles = makeStyles({
   likeComment: {
     display: "inline-block",
     marginLeft: "-12px",
+  },
+  username: {
+    transition: "all 250ms ease",
+    position: "relative",
+    left: "-6px",
+    padding: 6,
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.05)",
+    },
   },
 });
 
@@ -96,6 +109,7 @@ const Murmur = (props) => {
           component={Link}
           to={`/users/${username}`}
           color="primary"
+          className={classes.username}
         >
           {username}
         </Typography>

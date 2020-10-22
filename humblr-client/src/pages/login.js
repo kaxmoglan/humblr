@@ -68,6 +68,7 @@ const Login = (props) => {
             value={email}
             onChange={handleEmail}
             fullWidth
+            color="secondary"
           />
           <TextField
             id="password"
@@ -80,6 +81,7 @@ const Login = (props) => {
             value={password}
             onChange={handlePassword}
             fullWidth
+            color="secondary"
           />
           {errors.general && (
             <Typography variant="body2" className={classes.customError}>
@@ -88,8 +90,8 @@ const Login = (props) => {
           )}
           <Button
             type="submit"
-            variant="outlined"
-            color="primary"
+            variant="contained"
+            color="secondary"
             className={classes.button}
             disabled={loading}
           >

@@ -7,6 +7,8 @@ import PostMurmur from "..//murmur/PostMurmur";
 import Notifications from "./Notifications";
 import Info from "./Info";
 
+import logo from "../../images/Icon.png";
+
 // REDUX
 import { connect } from "react-redux";
 
@@ -21,7 +23,7 @@ import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles((theme) => ({
   navBarSVG: {
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.main,
     outline: "none",
   },
   link: {
@@ -34,6 +36,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+    paddingLeft: 0,
+  },
+  logo: {
+    width: 40,
+    maxHeight: "100%",
+    position: "absolute",
+    left: "1rem",
   },
 }));
 
@@ -43,10 +52,11 @@ const NavBar = (props) => {
   const classes = useStyles();
 
   return (
-    <AppBar>
+    <AppBar color="#fff">
       <Toolbar className={classes.navBar}>
         {authenticated ? (
           <>
+            <img src={logo} className={classes.logo} />
             <Link to="/" className={classes.link}>
               <CustomBtn tip="Home" btnClassName={classes.navBarSVG}>
                 <HomeIcon />
@@ -58,6 +68,7 @@ const NavBar = (props) => {
           </>
         ) : (
           <>
+            <img src={logo} className={classes.logo} />
             <Button color="inherit" component={Link} to="/">
               Home
             </Button>

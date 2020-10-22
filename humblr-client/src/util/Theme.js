@@ -1,15 +1,15 @@
 export default {
   palette: {
     primary: {
-      light: "#33c9dc",
-      main: "#00bcd4",
-      dark: "#008394",
+      light: "#61BB46", // HIGHLIGHT
+      main: "#000",
+      dark: "#61BB46", // BUTTON HOVER COLOR
       contrastText: "#fff",
     },
     secondary: {
-      light: "#ff6333",
-      main: "#ff3d00",
-      dark: "#b22a00",
+      light: "#61BB46", // BUTTON HOVER
+      main: "#61BB46", // HIGHLIGHT
+      dark: "#70d851", // BUTTON HOVER COLOR
       contrastText: "#fff",
     },
   },

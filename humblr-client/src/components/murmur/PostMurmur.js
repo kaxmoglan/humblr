@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   navBarSVG: {
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.main,
     outline: false,
   },
   textField: {
@@ -138,13 +138,14 @@ const PostMurmur = (props) => {
               onChange={handleChange}
               value={content}
               fullWidth
+              color="secondary"
             />
             <Button
               type="submit"
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submitBtn}
-              disabled={loading || contentLength > 100}
+              disabled={loading || contentLength > 100 || contentLength < 1}
               onClick={handleSubmit}
             >
               Post
@@ -152,6 +153,7 @@ const PostMurmur = (props) => {
                 <CircularProgress
                   size={30}
                   className={classes.progressSpinner}
+                  color="secondary"
                 />
               )}
             </Button>
@@ -162,13 +164,13 @@ const PostMurmur = (props) => {
               color={contentLength > 100 ? "error" : "textPrimary"}
               className={classes.charCount}
             >
-              {contentLength}
+              {contentLength > 0 && contentLength}
             </Typography>
             <CircularProgress
               variant="static"
               value={contentLength > 100 ? 100 : contentLength}
               size={25}
-              color={contentLength > 100 ? "secondary" : "primary"}
+              color="secondary"
             />
           </div>
         </DialogContent>

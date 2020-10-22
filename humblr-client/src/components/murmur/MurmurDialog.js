@@ -73,6 +73,16 @@ const useStyles = makeStyles((theme) => ({
   noComments: {
     margin: "0 auto 10px auto",
   },
+  username: {
+    transition: "all 250ms ease",
+    position: "relative",
+    left: "-6px",
+    padding: 6,
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.05)",
+    },
+  },
 }));
 
 // RENDER
@@ -134,7 +144,11 @@ const MurmurDialog = (props) => {
 
   // Markup
   const dialogMarkup = loading ? (
-    <CircularProgress className={classes.progress} size={60} />
+    <CircularProgress
+      className={classes.progress}
+      color="secondary"
+      size={60}
+    />
   ) : (
     <Grid container spacing={2}>
       <Grid item sm={4}>
@@ -150,6 +164,7 @@ const MurmurDialog = (props) => {
           color="primary"
           variant="h5"
           to={`/users/${username}`}
+          className={classes.username}
         >
           @{username}
         </Typography>

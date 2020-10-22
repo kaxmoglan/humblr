@@ -92,12 +92,13 @@ const EditProfile = (props) => {
               type="text"
               label="Bio"
               multiline
-              rows="3"
+              rows="1"
               placeholder="A short bio about yourself"
               className={classes.textField}
               value={bio}
               onChange={handleChange}
               fullWidth
+              color="secondary"
             />
             <TextField
               name="website"
@@ -108,6 +109,7 @@ const EditProfile = (props) => {
               value={website}
               onChange={handleChange}
               fullWidth
+              color="secondary"
             />
             <TextField
               name="location"
@@ -118,14 +120,15 @@ const EditProfile = (props) => {
               value={location}
               onChange={handleChange}
               fullWidth
+              color="secondary"
             />
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ padding: "0 25px 25px 0" }}>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button onClick={handleSubmit} color="secondary" variant="contained">
             Save
           </Button>
         </DialogActions>

@@ -101,7 +101,7 @@ const Notifications = (props) => {
           aria-owns={anchorEl ? "simple-menu" : undefined}
           aria-haspopup="true"
           onClick={handleOpen}
-          style={{ color: "#fff" }}
+          style={{ color: "#000" }}
         >
           {notificationIcon}
         </IconButton>

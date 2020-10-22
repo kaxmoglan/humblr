@@ -26,7 +26,8 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: 20,
+    padding: 10,
+    boxShadow: "none",
   },
   profile: {
     "& .image-wrapper": {
@@ -72,6 +73,26 @@ const useStyles = makeStyles((theme) => ({
   },
   websiteLink: {
     wordWrap: "break-word",
+
+    transition: "all 250ms ease",
+    position: "relative",
+    left: "-4px",
+    padding: "6px 6px 6px 2px",
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.05)",
+    },
+  },
+  username: {
+    transition: "all 250ms ease",
+    position: "relative",
+    left: "-6px",
+    padding: 6,
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.05)",
+    },
+    marginBottom: 30,
   },
 }));
 
@@ -134,16 +155,24 @@ const Profile = (props) => {
           </div>
           <hr />
           <div className="profile-details">
-            <MuiLink
+            <Typography
               component={Link}
               to={`/users/${username}`}
               color="primary"
               variant="h5"
+              className={classes.username}
             >
               @{username}
-            </MuiLink>
+            </Typography>
             <hr />
-            {bio && <Typography variant="body1">{bio}</Typography>}
+            {bio && (
+              <Typography
+                style={{ marginBottom: 20, marginTop: 20 }}
+                variant="body1"
+              >
+                {bio}
+              </Typography>
+            )}
             <hr />
             {location && (
               <>
@@ -181,15 +210,16 @@ const Profile = (props) => {
       </Paper>
     ) : (
       <Paper className={classes.paper}>
-        <Typography variant="body2" align="center">
-          No profile found, please login.
+        <Typography variant="h5" align="center">
+          Welcome to Humblr.
         </Typography>
         <div className={classes.buttons}>
           <Button
-            variant="contained"
+            // variant="contained"
             color="primary"
             component={Link}
             to="/login"
+            style={{ boxShadow: "none" }}
           >
             Login
           </Button>
@@ -198,6 +228,7 @@ const Profile = (props) => {
             color="secondary"
             component={Link}
             to="/signup"
+            style={{ boxShadow: "none" }}
           >
             Sign Up
           </Button>
