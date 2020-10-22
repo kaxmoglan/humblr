@@ -127,7 +127,11 @@ const Signup = (props) => {
           >
             Sign Up
             {loading && (
-              <CircularProgress size={30} className={classes.progress} />
+              <CircularProgress
+                size={30}
+                className={classes.progress}
+                color="secondary"
+              />
             )}
           </Button>
           <br />

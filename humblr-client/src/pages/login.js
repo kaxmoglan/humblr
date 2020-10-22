@@ -97,7 +97,11 @@ const Login = (props) => {
           >
             Login
             {loading && (
-              <CircularProgress size={30} className={classes.progress} />
+              <CircularProgress
+                size={30}
+                className={classes.progress}
+                color="secondary"
+              />
             )}
           </Button>
           <br />

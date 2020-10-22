@@ -207,6 +207,18 @@ exports.uploadImage = (req, res) => {
   const os = require("os");
   const fs = require("fs");
 
+  // GET CURRENT PROFILE PICTURE FILE NAME & DEFAULT PROFILE FILE URL
+  const prevImage = req.user.imageUrl
+    .split(
+      "https://firebasestorage.googleapis.com/v0/b/humblr-sm.appspot.com/o/"
+    )
+    .join("")
+    .split("?alt=media")
+    .join("");
+  const defaultImage =
+    "https://firebasestorage.googleapis.com/v0/b/humblr-sm.appspot.com/o/default_profile.png?alt=media";
+
+  // UPLOAD NEW PICTURE
   const busboy = new BusBoy({ headers: req.headers });
 
   let imageFileName;
@@ -216,6 +228,12 @@ exports.uploadImage = (req, res) => {
     if (mimetype !== "image/jpeg" && mimetype !== "image/png") {
       return res.status(400).json({ error: "Wrong file type submitted" });
     }
+
+    // Delete previous profile picture
+    if (req.user.imageUrl !== defaultImage && prevImage !== "") {
+      admin.storage().bucket().file(prevImage).delete();
+    }
+
     const imageExtension = filename.split(".")[filename.split(".").length - 1];
     imageFileName = `${nanoid()}.${imageExtension}`;
     const filePath = path.join(os.tmpdir(), imageFileName);
