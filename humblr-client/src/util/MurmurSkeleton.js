@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 25,
   },
   cover: {
-    width: 225,
-    height: 140,
+    width: 250,
+    height: 150,
     borderRadius: "50%",
     marginLeft: "25px",
     backgroundColor: "rgba(0,0,0,0.3)",
@@ -46,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgba(0,0,0,0.4)",
   },
   halfLine: {
-    height: 18,
-    width: "40%",
-    marginBottom: 15,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    height: 22,
+    width: "30%",
+    marginBottom: 11,
+    backgroundColor: "rgba(0,0,0,1)",
   },
 }));
 
