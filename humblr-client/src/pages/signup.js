@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import AppLogo from "../images/logo.png";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
+import AppLogo from "../images/logo.png";
 import FormStyles from "../util/FormStyles";
 
 // REDUX
@@ -76,6 +78,7 @@ const Signup = (props) => {
             value={email}
             onChange={handleEmail}
             fullWidth
+            color="secondary"
           />
           <TextField
             id="password"
@@ -88,6 +91,7 @@ const Signup = (props) => {
             value={password}
             onChange={handlePassword}
             fullWidth
+            color="secondary"
           />
           <TextField
             id="confirmPassword"
@@ -100,6 +104,7 @@ const Signup = (props) => {
             value={confirmPassword}
             onChange={handleConfirmPassword}
             fullWidth
+            color="secondary"
           />
           <TextField
             id="username"
@@ -112,6 +117,7 @@ const Signup = (props) => {
             value={username}
             onChange={handleUsername}
             fullWidth
+            color="secondary"
           />
           {errors.general && (
             <Typography variant="body2" className={classes.customError}>
@@ -120,8 +126,8 @@ const Signup = (props) => {
           )}
           <Button
             type="submit"
-            variant="outlined"
-            color="primary"
+            variant="contained"
+            color="secondary"
             className={classes.button}
             disabled={loading}
           >
@@ -146,6 +152,12 @@ const Signup = (props) => {
       <Grid item sm />
     </Grid>
   );
+};
+
+Signup.propTypes = {
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  signupUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

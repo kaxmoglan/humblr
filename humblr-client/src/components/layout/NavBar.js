@@ -51,7 +51,7 @@ const NavBar = (props) => {
   const classes = useStyles();
 
   return (
-    <AppBar color="transparent">
+    <AppBar color="inherit">
       <Toolbar className={classes.navBar}>
         {authenticated ? (
           <>

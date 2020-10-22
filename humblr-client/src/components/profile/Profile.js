@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
@@ -235,6 +236,12 @@ const Profile = (props) => {
   );
 
   return profileMarkup;
+};
+
+Profile.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapActionsToProps = { logoutUser, uploadImage };

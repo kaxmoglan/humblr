@@ -41,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
   commentBody: {
     marginLeft: "3px",
   },
+  username: {
+    transition: "all 250ms ease",
+    position: "relative",
+    left: "-6px",
+    padding: 6,
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.05)",
+    },
+  },
 }));
 
 const Comments = (props) => {
@@ -74,6 +84,7 @@ const Comments = (props) => {
                       component={Link}
                       to={`/users/${username}`}
                       color="primary"
+                      className={classes.username}
                     >
                       @{username}
                     </Typography>

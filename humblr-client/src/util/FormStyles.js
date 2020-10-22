@@ -26,10 +26,10 @@ export default (theme) => ({
   },
   signUp: {
     "&:hover": {
-      color: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
     },
   },
   editBioButton: {
-    float: 'right'
-  }
+    float: "right",
+  },
 });

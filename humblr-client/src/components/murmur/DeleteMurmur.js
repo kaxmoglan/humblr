@@ -49,7 +49,7 @@ const DeleteMurmur = (props) => {
         onClick={handleOpen}
         btnClassName={classes.deleteBtn}
       >
-        <DeleteOutlineIcon color="secondary" />
+        <DeleteOutlineIcon color="primary" />
       </CustomBtn>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle style={{ textAlign: "center" }}>

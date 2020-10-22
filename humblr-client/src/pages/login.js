@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import AppLogo from "../images/logo.png";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
+import AppLogo from "../images/logo.png";
 import FormStyles from "../util/FormStyles";
 
 // REDUX
@@ -116,6 +118,12 @@ const Login = (props) => {
       <Grid item sm />
     </Grid>
   );
+};
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
