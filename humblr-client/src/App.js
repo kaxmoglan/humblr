@@ -27,6 +27,9 @@ import User from "./pages/User";
 // CUSTOM MATERIAL THEME
 const theme = createMuiTheme(ThemeFile);
 
+axios.defaults.baseURL =
+  "https://europe-west1-humblr-sm.cloudfunctions.net/api";
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
