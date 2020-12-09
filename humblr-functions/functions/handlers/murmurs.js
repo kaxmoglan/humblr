@@ -83,11 +83,9 @@ exports.getMurmur = (req, res) => {
 // COMMENT ON A MURMUR
 exports.commentOnMurmur = (req, res) => {
   if (req.body.body.trim() === "") {
-    return res
-      .status(400)
-      .json({
-        comment: "If you can't say anything nice, don't say anything at all.",
-      });
+    return res.status(400).json({
+      comment: "If you wish to comment, you might try writing something!",
+    });
   }
 
   const newComment = {

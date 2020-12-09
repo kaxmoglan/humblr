@@ -226,7 +226,9 @@ exports.uploadImage = (req, res) => {
 
   busboy.on("file", (fieldName, file, filename, encoding, mimetype) => {
     if (mimetype !== "image/jpeg" && mimetype !== "image/png") {
-      return res.status(400).json({ error: "Wrong file type submitted" });
+      return res
+        .status(400)
+        .json({ error: "Profile image must be in JPEG or PNG format." });
     }
 
     // Delete previous profile picture

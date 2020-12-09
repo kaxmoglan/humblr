@@ -73,20 +73,20 @@ const Info = () => {
           </Typography>
           <Typography variant="body1" style={{ marginBottom: 10 }}>
             The concept of Humblr is to encourage its users to share interesting
-            things and achievements. Examples might include a thought-provoking
-            article, a great book you’ve just finished or film you watched, a
-            thought-provoking piece of artwork or your dream web-developer job
-            acceptance letter.
+            things outside of themselves. Examples might include a
+            thought-provoking article, a great book you’ve just finished, film
+            you watched or a thought-provoking piece of artwork.
           </Typography>
           <Typography variant="body1" style={{ marginBottom: 10 }}>
             Examples of discouraged posts include pictures of your dinner and
             club-bathroom selfies.
           </Typography>
           <Typography variant="body1" style={{ marginBottom: 10 }}>
-            In a world so full of celebrity and materialism, we hope our users
-            will enjoy contributing to the internet murmur by starting great
-            conversations, challenging opinions and sharing new discoveries, and
-            maybe making social media a Humblr place in the process.
+            In a world so full of self-promotion, celebrity and materialism, we
+            hope our users will enjoy contributing to the internet murmur by
+            starting great conversations, challenging opinions and sharing new
+            discoveries, and maybe making social media a Humblr place in the
+            process.
           </Typography>
         </DialogContent>
       </Dialog>
