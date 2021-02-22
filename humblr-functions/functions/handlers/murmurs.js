@@ -225,7 +225,7 @@ exports.deleteMurmur = (req, res) => {
       }
     })
     .then(() => {
-      res.json({ message: "Scream deleted successfully" });
+      res.json({ message: "Murmur deleted successfully" });
     })
     .catch((err) => {
       console.error(err);
